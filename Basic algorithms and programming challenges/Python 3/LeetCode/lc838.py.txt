@@ -1,0 +1,42 @@
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+        
+        s  = ""
+        
+        lim = len(dominoes)
+        
+        
+        i = 0
+        
+        while i<lim:
+            if dominoes[i]=='.':
+                ct = 0
+                st = -1
+                ed = -1
+                if i!=0:
+                    st = dominoes[i-1]
+                j = i
+                while j<lim:
+                    if dominoes[j]!='.':
+                        ed = dominoes[j]
+                        break
+                    ct+=1
+                    j+=1
+                    
+                if (st=='L' or st==-1) and (ed==-1 or ed=='R'):
+                    s+='.'*ct
+                elif (st==-1 or st=='L') and ed=='L':
+                    s+='L'*ct
+                elif st=='R' and (ed==-1 or ed=='R'):
+                    s+='R'*ct
+                elif st=='R' and ed=='L':
+                    if ct%2==0:
+                        s+='R'*(ct//2)+'L'*(ct//2)
+                    else:
+                        s+='R'*(ct//2)+'.'+'L'*(ct//2)
+                
+                i = j
+            else:
+                s+=dominoes[i]
+                i+=1
+        return s

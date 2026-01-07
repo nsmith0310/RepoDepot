@@ -1,0 +1,46 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        
+        inc = [0]*numCourses
+        out = [0]*numCourses
+        
+        l = []
+        
+        s = []
+        
+        d = dict()
+        
+        for x in prerequisites:
+            try:
+                d[x[1]].append(x[0])
+            except:
+                d[x[1]]=[x[0]]
+            if x[0] not in d:
+                d[x[0]]=[]
+                
+            inc[x[0]]+=1
+            out[x[1]]+=1
+         
+        for i in range(0,numCourses):
+            if inc[i]==0 and out[i]!=0:
+                s.append(i)
+            
+        while s!=[]:
+            
+            tmp = s[0]
+            l.append(tmp)
+            out[tmp]+=1
+            del s[0]
+            
+            for y in d[tmp]:
+                del prerequisites[prerequisites.index([y,tmp])]
+                inc[y]-=1
+                if inc[y]==0:
+                    s.append(y)
+                    
+            
+        for i in range(0,numCourses):
+            if out[i]==0:
+                l.append(i)
+        if prerequisites!=[]:return []    
+        return l

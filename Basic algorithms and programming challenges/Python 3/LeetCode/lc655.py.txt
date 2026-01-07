@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def printTree(self, root: TreeNode) -> List[List[str]]:
+        
+        self.height = 0
+        
+        def h(node,l):
+            if node!=None:
+                if l>self.height:self.height=l
+                h(node.left,l+1)
+                h(node.right,l+1)
+        
+        h(root,1)
+        mx = (2**self.height)-1
+        
+        tmp = [["" for j in range(0,mx)] for i in range(0,self.height)]
+        
+        st = 0
+        ed = mx
+        
+        def r(node,st,ed,l):
+            if node!=None:
+                tmp[l-1][(st+ed)//2]=str(node.val)
+                r(node.left,st,(st+ed)//2,l+1)
+                r(node.right,(st+ed)//2,ed,l+1)
+                
+        r(root,st,ed,1)
+        return tmp
+                
+                
+                
+                
+                

@@ -1,0 +1,46 @@
+class Solution:
+    def wordSubsets(self, A: List[str], B: List[str]) -> List[str]:
+        
+        counts = [[chr(i),[]] for i in range(97,123)]
+        
+        for x in B:
+            e  = dict()
+            for i in range(0,len(x)):
+                try:
+                    e[x[i]]+=1
+                except:
+                    e[x[i]]=1
+            for x in e:
+                
+                counts[ord(x)-97][1].append(e[x])
+                
+        for i in range(0,26):
+            counts[i][1].sort(reverse=True)
+        i = 0
+        while i<len(counts):
+            if counts[i][1]==[]:
+                del counts[i]
+                i-=1
+            i+=1
+                
+        
+        f = []
+        
+        for x in A:
+            tmp = dict()
+            for i in range(0,len(x)):
+                try:
+                    tmp[x[i]]+=1
+                except:
+                    tmp[x[i]]=1
+            k = 0
+            for y in counts:
+                if y[0] not in tmp:
+                    k = 1
+                    break
+                if y[1][0]>tmp[y[0]]:
+                    k = 1
+                    break
+            if k==0:
+                f.append(x)
+        return f

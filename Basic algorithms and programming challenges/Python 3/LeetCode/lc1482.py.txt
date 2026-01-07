@@ -1,0 +1,75 @@
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        
+        d = dict()
+        d2 = dict()
+        for i in range(0,len(bloomDay)):
+            
+            try:
+                d[bloomDay[i]].append(i)
+                d2[bloomDay[i]] += 1
+            except:
+                d[bloomDay[i]] = [i]
+                d2[bloomDay[i]] = 1
+                
+        arr = []
+        
+        for x in d:
+            arr.append([x,d[x]])
+            
+        arr.sort(key=lambda x: x[0])
+        
+        mn = 9999999999999999
+        
+        l = 0
+        h = len(arr)-1
+        while l<=h:
+            mid = (l+h)//2
+            print(mid)
+            tmp = []
+            c = 0
+            for x in arr:
+                if x[0]<=arr[mid][0]:
+                    c+=d2[x[0]]
+                    tmp+=x[1]
+                else:
+                    break
+            
+            if c>=m*k:
+                if k==1:
+                    if arr[mid][0]<mn:
+                        mn = arr[mid][0]
+                    h = mid-1
+                else:
+                    tmp.sort()
+
+                    count = 1
+                    count2 = 0
+                    j = 0
+                    while j<len(tmp):
+
+                        if tmp[j]==tmp[j-1]+1:
+                            count+=1
+
+                        else:
+                            count = 1
+
+                        if count==k:
+                            count2+=1
+                            count = 1
+                            j+=2
+                        else:
+                            j+=1
+
+
+                    if count2>=m:
+                        if arr[mid][0]<mn:
+                            mn = arr[mid][0]
+                        h = mid-1
+                    else:
+                        l = mid+1
+                
+            else:
+                l = mid+1
+        if mn==9999999999999999:return -1
+        return mn

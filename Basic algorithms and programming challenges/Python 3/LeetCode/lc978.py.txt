@@ -1,0 +1,55 @@
+class Solution:
+    def maxTurbulenceSize(self, A: List[int]) -> int:
+        
+        lim = len(A)
+        if lim==1:return 1
+        l = 2
+        h = lim
+        
+        mx = 1
+        
+        while l<=h:
+            m = (l+h)//2
+            t = 0
+            for i in range(0,lim-m+1):
+                t1 = -1
+                if A[i]<A[i+1]:
+                    t1 = 0
+                    p = 1
+                    for j in range(i,i+m-1):
+                        if p==1:
+                            if not A[j]<A[j+1]:
+                                t1 = 1
+                                break
+                            p=0
+                        elif p==0:
+                            if not A[j]>A[j+1]:
+                                t1 = 1
+                                break
+                            p=1
+                elif A[i]>A[i+1]:
+                    t1 = 0
+                    p = 0
+                    for j in range(i,i+m-1):
+                        if p==1:
+                            if not A[j]<A[j+1]:
+                                t1 = 1
+                                break
+                            p=0
+                        elif p==0:
+                            if not A[j]>A[j+1]:
+                                t1 = 1
+                                break
+                            p=1
+                if t1==0:
+                    t = 1
+                    break
+            if t==1:
+                if m>mx:mx = m
+                l = m+1
+            else:
+                h = m-1
+        return mx
+                    
+                    
+                               

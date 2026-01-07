@@ -1,0 +1,36 @@
+class Solution:
+    
+    
+    def numSubseq(self, nums: List[int], target: int) -> int:
+        
+        lim = len(nums)
+        nums.sort()
+        
+        mod = 10**9 + 7
+        
+        t = 0
+        
+        
+        for i in range(0,lim):
+            l = i
+            h = lim-1
+            mx=0
+            while l<=h:
+                m = (l+h)//2
+                
+                if nums[i]+nums[m]>target:
+                    h = m-1
+                else:
+                    if m>mx:mx = m
+                    l = m+1
+            if mx-i>=0:
+                tmp = 2**(mx-i)
+                if tmp==1: 
+                    if 2*nums[mx]<=target:
+                        t+=1
+                else:
+                    t+=tmp
+                
+                
+            
+        return t%mod

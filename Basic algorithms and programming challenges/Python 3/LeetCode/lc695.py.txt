@@ -1,0 +1,45 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+         
+        lim1 = len(grid)
+        lim2 = len(grid[0])
+        mx = 0
+        for i in range(0,lim1):
+            for j in range(0,lim2):
+                
+                if grid[i][j]==1:
+                    c=0
+                    p = 0
+                    q = [[i,j]]
+                    fin = []
+                    while 1!=-1:
+                        tmp = []
+                        for x in q:
+                            if grid[x[0]][x[1]]==1:
+                                c+=1
+                                
+                                grid[x[0]][x[1]]=2
+                                
+                                    
+                                
+                                if x[0]>0:
+                                    tmp.append([x[0]-1,x[1]])
+                                if x[1]>0:
+                                    tmp.append([x[0],x[1]-1])
+                                if x[0]<lim1-1:
+                                    tmp.append([x[0]+1,x[1]])
+                                if x[1]<lim2-1:
+                                    tmp.append([x[0],x[1]+1])
+                        if tmp==[]:
+                            if c>mx:mx = c
+                                
+                            
+                            break
+                        else:
+                            q = tmp
+        print(grid)
+        return mx
+                                
+                            
+        
+        

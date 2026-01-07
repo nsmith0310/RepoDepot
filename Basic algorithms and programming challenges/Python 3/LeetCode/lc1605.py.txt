@@ -1,0 +1,42 @@
+class Solution:
+    def restoreMatrix(self, rowSum: List[int], colSum: List[int]) -> List[List[int]]:
+        
+        lim1 = len(rowSum)
+        lim2 = len(colSum)
+                
+        r = lim1
+        c = lim2
+        
+        arr = [[0 for i in range(0,lim2)] for i in range(0,lim1)]
+        
+        row = []
+        for i in range(0,lim1):
+            row.append([i,rowSum[i]])
+        col = []
+        
+        for i in range(0,lim2):
+            col.append([i,colSum[i]])
+            
+        try:     
+            while 1!=-1:
+                row.sort(key=lambda x: x[1])
+                col.sort(key=lambda x: x[1])
+
+                val1 = row[0]
+                val2 = col[0]
+                del row[0]
+                del col[0]
+                if val1[1]<val2[1]:
+                    arr[val1[0]][val2[0]]=val1[1]
+
+                    col.append([val2[0],val2[1]-val1[1]])
+
+                else:
+                    arr[val1[0]][val2[0]]=val2[1]
+                    row.append([val1[0],val1[1]-val2[1]])
+        except:
+            return arr
+                
+                
+                
+        

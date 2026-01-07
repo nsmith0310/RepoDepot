@@ -1,0 +1,73 @@
+class Solution:
+    
+    def namer(self,i,j):
+        return str(i)+'.'+str(j)
+    def regionsBySlashes(self, grid: List[str]) -> int:
+        
+        
+        d = dict()
+        
+        
+        lim1 = len(grid)
+        lim2 = len(grid[0])
+        
+        for i in range(0,lim1):
+            for j in range(0,lim2):
+                name = self.namer(i,j)
+                if grid[i][j]=='/':
+                    d[name]=[]
+                    if i>0:
+                        d[name].append(self.namer(i-1,j))
+                    if j>0:
+                        d[name].append(self.namer(i,j-1))
+                    d[name+'.']=[]
+                    if i<lim1-1:
+                        d[name+'.'].append(self.namer(i+1,j))
+                    if j<lim2-1:
+                        d[name+'.'].append(self.namer(i,j+1))
+                        
+                elif grid[i][j]=='\\':
+                    d[name]=[]
+                    if i>0:
+                        d[name].append(self.namer(i-1,j))
+                    if j<lim2-1:
+                        d[name].append(self.namer(i,j+1))
+                    d[name+'.']=[]
+                    if i<lim1-1:
+                        d[name+'.'].append(self.namer(i+1,j))
+                    if j>0:
+                        d[name+'.'].append(self.namer(i,j-1))
+                else:
+                    d[name]=[]
+                    if i>0:
+                        d[name].append(self.namer(i-1,j))
+                    if j>0:
+                        d[name].append(self.namer(i,j-1))
+                    if i<lim1-1:
+                        d[name].append(self.namer(i+1,j))
+                    if j<lim2-1:
+                        d[name].append(self.namer(i,j+1))
+        
+        ###print(d)
+        for x in d:
+            for i in range(0,len(d[x])):
+                if x not in d[d[x][i]] and x[:-1] not in d[d[x][i]]:
+                    d[x][i]+='.'
+                    
+        ###print(d)
+        
+        c = 0
+        
+        s = set()
+        
+        def r(val):
+            if val not in s:
+                s.add(val)
+                for x in d[val]:
+                    r(x)
+                    
+        for x in d:
+            if x not in s:
+                c+=1
+                r(x)
+        return c

@@ -1,0 +1,55 @@
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        
+        d = dict()
+        d3 = dict()
+        for x in connections:
+            try:
+                d[x[0]].add(x[1])
+            except:
+                d[x[0]]=set()
+                d[x[0]].add(x[1])
+            try:
+                d[x[1]].add(x[0])
+            except:
+                d[x[1]]=set()
+                d[x[1]].add(x[0])
+            try:
+                d3[x[0]].add(x[1])
+            except:
+                d3[x[0]]=set()
+                d3[x[0]].add(x[1])
+                
+        d2 = dict()
+        
+        
+        vals = [0]
+        while 1!=-1:
+            tmp = []
+            for y in vals:
+                for x in d[y]:
+                    d[x].remove(y)
+                    tmp.append(x)
+                d2[y] = list(d[y])
+            if tmp==[]:
+                break
+            else:
+                vals = tmp
+        
+        arr = [-1 for i in range(0,n)]
+        
+        self.f=0
+        def r(n):
+            if arr[n]==-1:
+                try:
+                    for y in d3[n]:
+                        if y in d[n]:
+                            self.f+=1
+                except:
+                    pass
+                for x in d2[n]:
+                    r(x)
+                arr[n]=1
+        r(0)
+        return self.f
+        

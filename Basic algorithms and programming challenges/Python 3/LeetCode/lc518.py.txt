@@ -1,0 +1,20 @@
+from functools import lru_cache
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        self.lim = len(coins)
+        self.c = 0
+        
+        @lru_cache(None)
+        def r(i,val,c):
+            
+            if val==amount:
+                return 1
+            else:
+                for j in range(i,self.lim):
+                    if val+coins[j]<=amount:
+                        c+=r(j,val+coins[j],0)
+                return c
+        
+        return r(0,0,0)
+       
+                

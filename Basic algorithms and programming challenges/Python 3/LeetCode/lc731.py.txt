@@ -1,0 +1,39 @@
+class MyCalendarTwo:
+
+    def __init__(self):
+        self.sgl = []
+        self.sl = 0      
+        self.dbl = []
+        self.dl = 0     
+        
+    def overlap(self,a,b):
+        return a[0]<b[1] and a[1]>b[0]
+    
+    def book(self, start: int, end: int) -> bool:
+        
+        if self.dl!=0:
+            for i in range(0,self.dl):             
+                if self.overlap([start,end],self.dbl[i])==True:
+                    return False
+        
+        for i in range(0,self.sl):
+            if self.overlap([start,end],self.sgl[i])==True:
+                self.dbl.append([max(start,self.sgl[i][0]),min(end,self.sgl[i][1])])
+                self.dl+=1
+        self.sgl.append([start,end])
+        self.sl+=1
+        return True
+            
+                        
+        
+            
+        
+        
+        
+                
+                
+
+
+# Your MyCalendarTwo object will be instantiated and called as such:
+# obj = MyCalendarTwo()
+# param_1 = obj.book(start,end)

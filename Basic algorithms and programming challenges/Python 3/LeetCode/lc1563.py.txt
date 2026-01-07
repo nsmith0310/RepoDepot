@@ -1,0 +1,51 @@
+from functools import lru_cache
+class Solution:
+    def stoneGameV(self, stoneValue: List[int]) -> int:
+        
+        lim = len(stoneValue)
+        if lim==1:return 0
+        
+        pref = [stoneValue[0]]
+        
+        for i in range(1,lim):
+            pref.append(pref[-1]+stoneValue[i])
+        
+        
+        
+        @lru_cache(None)
+        def r(h,j):
+            if all(stoneValue[a]==stoneValue[h] for a in range(h,j)):
+                ct = 0
+                l = j-h
+                while l>1:
+                    l//=2
+                    ct+=l
+                return stoneValue[h]*ct
+            
+            mx = 0
+            for i in range(h+1,j):
+                val1 = pref[i-1]-pref[h]+stoneValue[h]
+                val2 = pref[j-1]-pref[i]+stoneValue[i]
+
+                if val1<val2:
+                   
+                            
+                    t = val1+r(h,i)
+                    if t>mx:mx = t
+
+                elif val2<val1:
+                    
+                    t = val2+r(i,j)
+                    if t>mx:mx = t
+                else:
+                    v1 = val1+r(h,i)
+                    v2 = val2+r(i,j)
+                    
+                    if v1>mx:mx = v1
+                    if v2>mx:mx = v2
+            
+            return mx        
+            
+         
+            
+        return r(0,lim)

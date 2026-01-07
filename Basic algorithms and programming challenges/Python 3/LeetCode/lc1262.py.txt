@@ -1,0 +1,45 @@
+
+class Solution:
+    def maxSumDivThree(self, nums: List[int]) -> int:
+        
+        lim=len(nums)
+        
+        mds = [0,0,0]
+        
+        arr = [nums[0]]
+        
+        m1 = []
+        m2 = []
+        
+        if nums[0]%3==1:m1.append(nums[0])
+        if nums[0]%3==2:m2.append(nums[0])
+            
+        for i in range(1,lim):
+            arr.append(arr[-1]+nums[i])
+            
+            mds[arr[-1]%3]=arr[-1]
+            if nums[i]%3==1:
+                m1.append(nums[i])
+            elif nums[i]%3==2:
+                m2.append(nums[i])
+        
+        m1.sort()
+        m2.sort()
+        
+        pos = [mds[0]]
+        
+        lim1 = len(m1)
+        lim2 = len(m2)
+        
+        if lim1>=1:
+            pos.append(mds[1]-m1[0])
+        if lim1>=2:
+            pos.append(mds[2]-m1[0]-m1[1])
+            
+        if lim2>=1:
+            pos.append(mds[2]-m2[0])
+        if lim2>=2:
+            pos.append(mds[1]-m2[0]-m2[1])
+            
+            
+        return max(pos)

@@ -1,0 +1,43 @@
+class Solution:
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        
+        lim = len(graph)
+        d = dict()
+        
+        arr=[-1 for i in range(0,lim)]
+        
+        for i in range(0,lim):
+            d[i]=graph[i]
+            
+        def r(n):
+            
+            if arr[n]==-1:
+                arr[n]=0
+                if d[n]==[]:
+                    arr[n]=2
+                    return 2
+                else:
+                    tmp = []
+                    for x in d[n]:
+                        tmp.append(r(x))
+                    if tmp==[2]*len(d[n]):
+                        arr[n]=2
+                        return 2
+                    else:
+                        arr[n]=1
+                        return 1
+                    
+                    
+            else:
+                return arr[n]
+                
+        f = []
+        
+        for i in range(0,lim):
+            r(i)
+        
+        for i in range(0,lim):
+            if arr[i]==2:
+                f.append(i)
+                
+        return f

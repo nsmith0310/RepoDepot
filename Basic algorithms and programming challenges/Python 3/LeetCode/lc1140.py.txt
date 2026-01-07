@@ -1,0 +1,36 @@
+from functools import lru_cache
+class Solution:
+    def stoneGameII(self, piles: List[int]) -> int:
+        
+        
+        lim = len(piles)
+        
+        s = sum(piles)
+        @lru_cache(None)
+        def r(p,idx,M):
+            if p==0:
+                tmp = []
+                for i in range(1,2*M+1):
+                    if idx+1<=lim:
+                        tmp.append(sum(piles[idx:min(idx+i,lim)])+r(1,idx+i,max(M,i)))
+                    else:
+                        tmp.append(0)
+                        
+                return max(tmp)
+            else:
+                tmp = []
+                for i in range(1,2*M+1):
+                    if idx+1<=lim:
+                        tmp.append(-sum(piles[idx:min(idx+i,lim)])+r(0,idx+i,max(M,i)))
+                    else:
+                        tmp.append(0)
+                      
+                return min(tmp)
+            
+        
+        return (s+r(0,0,1))//2
+        
+                
+            
+        
+            

@@ -1,0 +1,24 @@
+class Solution:
+    
+    def maxProfit(self, prices: List[int]) -> int:
+        
+        lim = len(prices)
+        
+        bmap = dict()
+        smap = dict()
+        
+        def buy(i):
+            if i>=lim:return 0
+            if i in bmap: return bmap[i]
+            num = max((-prices[i] + sell(i+1)),buy(i+1))
+            bmap[i]=num
+            return num
+        
+        def sell(i):
+            if i>=lim:return 0
+            if i in smap: return smap[i]
+            num = max((prices[i] + buy(i+2)),sell(i+1))
+            smap[i]=num
+            return num
+            
+        return buy(0)

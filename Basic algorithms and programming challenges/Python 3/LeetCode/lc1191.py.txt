@@ -1,0 +1,36 @@
+class Solution:
+    def kConcatenationMaxSum(self, arr: List[int], k: int) -> int:
+        
+        lim = len(arr)
+        one = -999999999999999999
+        oneh = 0
+        pre  = [0]
+        pm = -999999999999999999
+        s = 0
+        
+        for i in range(0,lim):
+            s+=arr[i]
+            
+            oneh+=arr[i]
+            
+            pre.append(pre[-1]+arr[i])
+            
+            if pre[-1]>pm:pm = pre[-1]
+                
+            if oneh<0:
+                oneh=0
+            if oneh>one:
+                one = oneh
+        if k==1:return one
+        
+        sm = s
+        suff = [s]
+        for i in range(1,lim):
+            suff.append(suff[-1]-arr[i-1])
+            
+            if suff[-1]>sm:sm = suff[-1]
+                
+        del pre[0]
+        
+    
+        return max(one,k*s,pm +sm,(k-2)*s,pm +sm+ (k-2)*s)%(10**9 + 7)

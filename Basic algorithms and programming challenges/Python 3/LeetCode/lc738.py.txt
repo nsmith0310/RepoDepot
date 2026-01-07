@@ -1,0 +1,42 @@
+class Solution:
+    
+    def conv(self,l):
+        return int(''.join(list(map(str,l))))
+    
+    def monotoneIncreasingDigits(self, N: int) -> int:
+        
+        s = str(N)
+        lim = len(s)
+        if lim==1:return N-1
+        
+        
+        
+        n = list(map(int,list(s)))
+        f = [n[0]]*lim
+        
+        if self.conv(f)>N:
+            f[0]-=1
+            return self.conv([n[0]-1]+[9]*(lim-1))
+        
+        
+            
+        for j in range(0,lim):
+            
+            tmp = f[:j]+[9]*(lim-j)
+            if self.conv(tmp)>N:
+                c = 0
+                while self.conv(tmp)>N:
+                    tmp = f[:j]+[9-c]*(lim-j)
+                    c+=1
+                tmp = tmp[:j+1]+[9-c]*(lim-j-1)
+            f = tmp
+            
+        return self.conv(f)
+                
+                
+            
+            
+        
+        
+            
+        

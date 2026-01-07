@@ -1,0 +1,48 @@
+from random import randint as r
+class Solution:
+    def __init__(self, rects: List[List[int]]):
+        self.a = []
+        self.d = dict()   
+        for i in range(0,len(rects)):
+            val = abs(rects[i][0]-rects[i][2])*abs(rects[i][1]-rects[i][3])      
+            print(val)
+            try:
+                self.d[val].append(rects[i])
+                self.a.append(val) 
+            except:
+                self.d[val] = [rects[i]]
+                self.a.append(val)   
+                
+        self.a2 = []
+        self.a = sorted(list(self.a))
+        
+        self.c = 0
+        
+        start = 0
+        for j in range(0,len(self.a)):
+            self.a2.append([start,start+self.a[j]])
+            start = start+self.a[j]+1
+            self.c+=1
+            
+        self.lim = self.a2[-1][-1] 
+        
+    def pick(self) -> List[int]:        
+        num = r(0,self.lim)
+        l = 0
+        h = self.c        
+        while l<=h:
+            m = (l+h)//2
+            val = self.a2[m]
+            if num<val[0]:
+                h = m-1
+            elif num>val[1]:
+                l = m+1
+            else:
+                num2 = self.d[self.a[m]][r(0,len(self.d[self.a[m]])-1)]
+                xval = r(num2[0],num2[2])
+                yval = r(num2[1],num2[3])
+                return [xval,yval]
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(rects)
+# param_1 = obj.pick()

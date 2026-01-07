@@ -1,0 +1,16 @@
+class Solution:
+    def countNumbersWithUniqueDigits(self, n: int) -> int:
+        
+        if n==0:return 1
+        s = 9
+        t = 0
+        
+        k = 2
+        
+        c = 1
+        arr = [10,81]
+        while k<n:
+            arr.append(arr[-1]*(s-c))
+            c+=1
+            k+=1
+        return sum(arr[:n])

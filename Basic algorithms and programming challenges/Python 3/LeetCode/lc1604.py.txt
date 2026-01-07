@@ -1,0 +1,39 @@
+class Solution:    
+    def plus(self,time,time2):        
+        tmp = time.split(':')
+        tmp[0]=int(tmp[0])+1
+        tmp[1]=int(tmp[1])        
+        tmp2 = time2.split(':')
+        tmp2[0]=int(tmp2[0])
+        tmp2[1]=int(tmp2[1])        
+        if tmp2[0]<tmp[0]:
+            return True
+        if tmp2[0]==tmp[0]:
+            if tmp2[1]<=tmp[1]:
+                return True
+        return False               
+    def alertNames(self, keyName: List[str], keyTime: List[str]) -> List[str]:
+        
+        lim = len(keyName)
+        d = dict()
+        
+        for i in range(0,lim):
+            try:
+                d[keyName[i]].add(keyTime[i])
+            except:
+                d[keyName[i]]=set()
+                d[keyName[i]].add(keyTime[i])                        
+        f = set()
+        
+        for x in d:
+            tmp = sorted(list(d[x]))            
+            for j in range(0,len(tmp)-2):                                
+                c = 0
+                for k in range(j+1,j+3):                    
+                    if self.plus(tmp[j],tmp[k])==True:                        
+                        c+=1
+                if c==2:                    
+                    f.add(x)
+                    break
+        return sorted(list(f))
+            

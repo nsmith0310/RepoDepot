@@ -1,0 +1,45 @@
+class Solution:
+    def canTransform(self, start: str, end: str) -> bool:
+        
+        
+        st = list(start)
+        ed = list(end)
+        
+        if sorted(st)!=sorted(ed):return False
+        
+        sli = []
+        eli = []
+        
+        sri = []
+        eri = []
+        
+        lim = len(st)
+        for i in range(0,lim):
+            if st[i]=='L':
+                sli.append(i)
+            elif st[i]=='R':
+                sri.append(i)
+                
+        for i in range(0,lim):
+            if ed[i]=='L':
+                eli.append(i)
+            elif ed[i]=='R':
+                eri.append(i)
+                
+        ls = []
+        rs = []
+        for i in range(0,len(sli)):
+            if sli[i]<eli[i]:return False
+            ls.append(sorted([sli[i],eli[i]]))
+        if ls!=[]:ls.sort(key=lambda x: x[0])
+        for i in range(0,len(sri)):
+            if sri[i]>eri[i]:return False
+            for x in ls:
+                if eri[i]>=x[0] and eri[i]<=x[1]:return False
+            rs.append(sorted([eri[i],sri[i]]))
+        if rs!=[]:rs.sort(key=lambda x: x[0])    
+        for x in rs:
+            for y in eli:
+                if y>=x[0] and y<=x[1]:
+                    return False
+        return True

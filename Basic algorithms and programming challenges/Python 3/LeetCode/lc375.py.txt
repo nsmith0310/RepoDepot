@@ -1,0 +1,22 @@
+from functools import lru_cache
+class Solution:
+    def getMoneyAmount(self, n: int) -> int:
+        @lru_cache(None)
+        def r(l,h):
+            
+            if h-l==1:
+                return max(l,h)
+            elif h-l<=0:
+                return 0
+            
+            tmp = []
+            
+            for i in range(l,h+1):
+                val = (i+h)//2
+                tmp.append(max(val + r(l,val-1),val+r(val+1,h)))
+                                
+             
+            return min(tmp)
+        
+        if n==2:return 1
+        return r(1,n)

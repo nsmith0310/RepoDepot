@@ -1,0 +1,41 @@
+class Solution:
+    def loudAndRich(self, richer: List[List[int]], quiet: List[int]) -> List[int]:
+        
+        lim = len(quiet)
+        d = dict()
+        vals = [-1 for i in range(0,lim)]
+        for x in richer:
+            try:
+                d[x[1]].append(x[0])
+            except:
+                vals[x[1]]=1
+                d[x[1]]=[x[0]]
+        
+        
+        arr = [-1 for x in range(0,lim)]
+        
+        def r(n):
+            if arr[n]!=-1:
+                return arr[n]
+            else:
+                tmp = [n]
+                if vals[n]==1:
+                    for x in d[n]:
+
+                        tmp+=r(x)
+                arr[n]=list(set(tmp))
+                return arr[n]
+            
+        mxm = 99999999999999999999
+        
+        f = [i for i in range(0,lim)]
+        for i in range(0,lim):
+            v = r(i)
+            mx = mxm
+            valu = i
+            for x in v:
+                if quiet[x]<mx:
+                    mx = quiet[x]
+                    valu = x
+            f[i]=valu
+        return f

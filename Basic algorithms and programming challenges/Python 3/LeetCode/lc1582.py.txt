@@ -1,0 +1,24 @@
+class Solution:
+    def numSpecial(self, mat: List[List[int]]) -> int:
+        
+        
+        lim1 = len(mat)
+        lim2 = len(mat[0])
+        
+        t = 0
+        for i in range(0,lim1):
+            c = 0
+            val = -1
+            for j in range(0,lim2):
+                if mat[i][j]==1:
+                    c+=1
+                    val = j
+                    
+            if c==1:
+                c2 = 0
+                for i in range(0,lim1):
+                    if mat[i][val]==1:
+                        c2+=1
+                ###print(c2)
+                if c2==1:t+=1
+        return t

@@ -1,0 +1,13 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        lim1 = len(s1)
+        lim2 = len(s2)
+        
+        if lim1>lim2:return False
+        
+        s = sorted(list(s1))
+        
+        for j in range(0,lim2-lim1+1):
+            if sorted(s2[j:j+lim1])==s:return True
+            
+        return False

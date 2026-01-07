@@ -1,0 +1,51 @@
+class Solution:
+    def numWays(self, s: str) -> int:
+        
+        k = sum(list(map(int,list(s))))
+        if k%3!=0:
+            return 0
+        
+        lim = len(s)
+        
+        if k==0:
+            num = lim-2
+            return (num*(num+1)//2)%(10**9 + 7)
+        
+        if s[0]=='1':
+            pref = [1]
+        else:
+            pref = [0]
+            
+        if s[-1]=='1':
+            suff = [1]
+        else:
+            suff = [0]
+        
+        val = k//3
+        
+        if pref[0]==val:
+            c1=1
+        else:
+            c1=0
+        if suff[0]==val:
+            c2=1
+        else:
+            c2=0
+            
+        for i in range(1,lim):
+            if s[i]=='1':
+                pref.append(pref[-1]+1)
+            else:
+                pref.append(pref[-1])
+                
+            if s[lim-i-1]=='1':
+                suff.insert(0,suff[0]+1)
+            else:
+                suff.insert(0,suff[0])
+            if pref[-1]==val:
+                c1+=1
+            if suff[0]==val:
+                c2+=1
+            if pref[-1]>val and suff[0]>val:break
+            
+        return (c1*c2)%(10**9 + 7)

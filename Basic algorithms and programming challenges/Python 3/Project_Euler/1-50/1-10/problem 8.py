@@ -1,0 +1,63 @@
+import numpy as np
+from functools import reduce 
+
+seq="7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450"
+s=[]
+i=0
+try:
+    while i < 988:
+        s.append((seq[i:(i+13)]))
+        i+=1
+except:
+    pass
+
+i=0
+s_split=[]
+while i < len(s):
+    s_split.append(list(s[i]))
+    i+=1
+s_split1=[]
+i=0
+while i < len(s_split):
+    s_split1.append(list(map(int, s_split[i])))
+    i+=1
+
+s_prod=[]
+for x in s_split1:
+    s_prod.append(reduce((lambda x, y: x * y), x))
+
+print("Max multiple of 13 adjacent integers from right to left: ", max(s_prod))
+
+seq2=seq[::-1]
+s2=[]
+i=0
+try:
+    while i < 988:
+        s2.append((seq2[i:(i+13)]))
+        i+=1
+except:
+    pass
+
+i=0
+s2_split=[]
+while i < len(s):
+    s2_split.append(list(s2[i]))
+    i+=1
+s2_split1=[]
+i=0
+while i < len(s2_split):
+    s2_split1.append(list(map(int, s2_split[i])))
+    i+=1
+
+s2_prod=[]
+for x in s2_split1:
+    s2_prod.append(reduce((lambda x, y: x * y), x))
+    
+print("Max multiple of 13 adjacent integers from left to right: ", max(s2_prod))
+    
+if max(s_prod) > max(s2_prod):
+    print("max product of 13 adjacent integers scanned from right to left: ", max(s_prod))
+elif max(s_prod) < max(s2_prod):
+    print("max product of 13 adjacent integers scanned from left to right: ", max(s2_prod))
+else:
+    print("The value of the max product from right to left and left to right are equal to one another and are: ", max(s_prod))

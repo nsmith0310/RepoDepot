@@ -1,0 +1,55 @@
+class Solution:
+    
+    def iss(self, s, t, ls, lt):      
+        i = 0
+        j = 0
+        while i<ls and j<lt:
+            if s[i]==t[j]:
+                i+=1
+                j+=1
+            else:
+                j+=1
+        return i==ls
+    
+    def longestStrChain(self, words: List[str]) -> int:
+        
+        d = dict()
+        
+        mx = 0
+        for x in words:
+            l = len(x)
+            if l>mx:mx = l
+            try:
+                d[l].append(x)
+            except:
+                d[l]=[x]
+                
+        print(d)
+        
+        l = mx
+        mx = 1
+        
+        while l>1:
+            if l in d:
+                tmx = 1
+                m = l
+                tmp = d[m]
+                while 1!=-1:
+                    tmp2 = []
+                    if m-1 in d:
+                        for x in tmp:
+                            for y in d[m-1]:
+                                if self.iss(y,x,m-1,m)==True:
+                                    tmp2.append(y)
+                    if tmp2!=[]:
+                        tmx+=1
+                        if tmx>mx:mx = tmx
+                        tmp = tmp2
+                        m-=1
+                    else:
+                        break
+            l-=1
+        return mx
+                        
+                    
+                

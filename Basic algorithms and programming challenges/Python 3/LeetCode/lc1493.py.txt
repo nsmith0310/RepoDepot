@@ -1,0 +1,45 @@
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        
+        lim = len(nums)
+        a = []
+        c=0
+        
+        for i in range(0,lim):
+            if nums[i]==0:
+                c+=1
+            a.append(c)
+        
+        if a[-1]-a[0]<=1 and nums.count(0)<=1:return lim-1 
+        
+        mx = 0
+        l = 0
+        h = lim
+        
+        
+        while l<=h:
+            m = (l+h)//2
+            
+            
+            t = 0
+            for i in range(0,lim-m+1):
+                
+                    
+                if a[i+m-1]-a[i]+(1-nums[i])<=1:
+                    
+                    t = 1
+                    break
+            if t==1:
+                
+                if m-1>mx:
+                    mx=m-1
+                    
+                    
+                l = m+1
+            else:
+                h = m-1
+        return max(0,mx)
+                    
+        
+        
+        

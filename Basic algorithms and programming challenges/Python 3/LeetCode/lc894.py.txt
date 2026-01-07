@@ -1,0 +1,90 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    
+    
+            
+    def allPossibleFBT(self, N: int) -> List[TreeNode]:
+        
+        self.tmp = []
+        self.tmp3 = set()
+        def LR(node,s):
+            if node!=None:
+                s+=str(node.val)
+                if node.left!=None:
+                    s+="L"
+                    s+=LR(node.left,s)
+                if node.right!=None:
+                    s+="R"
+                    s+=LR(node.right,s)
+                return s
+            
+        
+        def cop(node):
+            if node!=None:
+                val = TreeNode(0)
+                val.left = cop(node.left)
+                val.right = cop(node.right)
+                return val
+            else:
+                return None
+            
+        def ext(node,root):
+            if node!=None:
+                
+                if node.left==None == node.right:
+                    node.left = TreeNode(0)
+                    node.right = TreeNode(0)
+                    
+                    d = LR(root,"")
+                    
+                    if d not in self.tmp3:
+                        self.tmp3.add(d)
+                        self.tmp.append(cop(root))
+                    
+                    node.left=None
+                    node.right=None
+                    
+                ext(node.left,root)
+                ext(node.right,root)
+                    
+        
+        
+        if N%2==0: return []
+        elif N==1: return [TreeNode(0)]
+            
+        
+        test = TreeNode(0)
+        test.right = TreeNode(0)
+        test.left = TreeNode(0)
+        
+        if N==3: return [test]
+        
+        tmp2 = [test]
+        
+        k = 3
+        while k<N:
+            tmp3 = set()
+            for x in tmp2:
+                ext(x,x)
+            
+            tmp2 = [y for y in self.tmp]
+            self.tmp3 = set()
+            self.tmp = []
+            k+=2
+        return tmp2
+            
+    
+        
+        
+        
+
+                
+        
+        
+        

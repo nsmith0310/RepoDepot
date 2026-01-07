@@ -1,0 +1,64 @@
+class Solution:
+    def isAdditiveNumber(self, num: str) -> bool:
+        
+        lim = len(num)
+        if lim<=2:return False
+        
+        
+        for i in range(1,lim):
+           
+            
+            d1 = num[:i]
+            num1 = int(d1)
+            bkup1 = num1
+            if not (d1[0]=='0' and len(d1)>1):
+                for j in range(i+1,lim):
+                    num2 = int(num[i:j])
+                    d2 = num[i:j]
+                    bkup2 = num2
+                    if not (d2[0]=='0' and len(d2)>1):
+                        for k in range(j+1,lim+1):
+                            d3= num[j:k]
+                            
+                            num1,num2 = bkup1,bkup2
+                            num3 = int(d3)
+                            
+                            
+                            if num1+num2==num3 and not (d3[0]=='0' and len(d3)>1):
+                             
+                                tmp = [num1,num2,num3]
+                               
+                                
+                                e = k
+                                if e==lim:
+                                    
+                                    return True
+                                
+                                while 1!=-1:
+                                  
+
+                                    t = 0
+                                    num1 = num2
+                                    num2 = num3
+
+
+                                    for l in range(e,lim+1):
+                                        num3 = int(num[e:l+1])
+                                        d3 = num[e:l+1]
+                                        
+                                        
+                                        if not (d3[0]=='0' and len(d3)>1) and num1+num2==num3:
+                                            tmp.append(num3)
+                                            if l==lim-1:
+                                                
+                                                return True
+                                            t = 1
+                                            break
+
+                                    if t==0:
+                                        num1 = num2
+                                        num2 = num3
+                                        break
+                                    else:
+                                        e = l+1
+        return False

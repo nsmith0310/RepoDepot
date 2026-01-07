@@ -1,0 +1,39 @@
+class Solution:
+    def findPaths(self, m: int, n: int, N: int, i: int, j: int) -> int:
+        
+        if m==0 or n==0: return 0
+        
+        arr = [[[-1 for k in range(0,N)] for i in range(0,n)] for j in range(0,m)]
+        
+        def r(v,c,M):
+            
+            if M>=0 and arr[v[0]][v[1]][M]!=-1:
+                return arr[v[0]][v[1]][M]
+            if M>=0:
+                
+                if v[0]+1==m:
+                    c+=1    
+                else:
+                    c+=r([v[0]+1,v[1]],0,M-1)
+                if v[0]-1==-1:
+                    c+=1
+                else:
+                    c+=r([v[0]-1,v[1]],0,M-1)
+                if v[1]+1==n:
+                    c+=1
+                else:
+                    c+=r([v[0],v[1]+1],0,M-1)
+                if v[1]-1==-1:
+                    c+=1
+                else:
+                    c+=r([v[0],v[1]-1],0,M-1)
+                
+                
+                arr[v[0]][v[1]][M]=c
+                return c
+            else:
+                return 0
+        
+        return(r([i,j],0,N-1)%(10**9 + 7))
+            
+        

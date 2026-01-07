@@ -1,0 +1,51 @@
+class Solution:
+    
+    def nxt(self,coord,val):
+        
+        if val==1:
+            return [[coord[0],coord[1]+1],[coord[0],coord[1]-1]]
+        if val==2:
+            return [[coord[0]+1,coord[1]],[coord[0]-1,coord[1]]]
+        if val==3:
+            return [[coord[0],coord[1]-1],[coord[0]+1,coord[1]]]
+        if val==4:
+            return [[coord[0]+1,coord[1]],[coord[0],coord[1]+1]]
+        if val==5:
+            return [[coord[0],coord[1]-1],[coord[0]-1,coord[1]]]
+        if val==6:
+            return [[coord[0]-1,coord[1]],[coord[0],coord[1]+1]]
+        
+    def hasValidPath(self, grid: List[List[int]]) -> bool:
+        
+        lim1 = len(grid)
+        lim2 = len(grid[0])
+        if lim1==lim2==1:return True
+        
+        
+        tmp = [[0,0]]
+        
+        s = set()
+        s.add(str(0)+'.'+str(0))
+        
+        for x in tmp:
+            tmp2 = self.nxt(x,grid[x[0]][x[1]])
+            
+            tmp3 = []
+            for y in tmp2:
+                
+                if (y[0]<lim1 and y[0]>=0) and (y[1]<lim2 and y[1]>=0):
+                    
+                    tmp3.append(y)
+            
+            
+            for z in tmp3:
+            
+                tmp4 = self.nxt(z,grid[z[0]][z[1]])
+                if x in tmp4:
+                    val = str(z[0])+'.'+str(z[1])
+                    if val not in s and z!=x:
+                        s.add(val)
+                        tmp.append(z)
+                        if z==[lim1-1,lim2-1]:return True
+               
+        return False

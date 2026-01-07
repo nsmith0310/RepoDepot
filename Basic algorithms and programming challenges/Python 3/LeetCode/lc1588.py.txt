@@ -1,0 +1,17 @@
+class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        
+        lim = len(arr)
+        pref = [arr[0]]
+        
+        for i in range(1,lim):
+            pref.append(pref[-1]+arr[i])
+        t =0 
+        for i in range(1,lim+1,2):
+            
+            for j in range(0,lim-i+1):
+                
+                t+=pref[j+i-1]-pref[j]+arr[j]
+            
+            
+        return t 

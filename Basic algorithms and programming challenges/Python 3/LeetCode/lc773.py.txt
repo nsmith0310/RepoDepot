@@ -1,0 +1,58 @@
+from itertools import permutations as p
+class Solution:
+    def slidingPuzzle(self, board: List[List[int]]) -> int:
+        
+        
+        end = [[1,2,3],[4,5,0]]
+        
+        s = set()
+        
+        if 0 in board[0]:
+            p = [0,board[0].index(0)]
+        else:
+            p = [1,board[1].index(0)]
+            
+        start = [[board,0,p]]
+        
+        mn = 999999999999999999
+        while 1!=-1:
+            tmp = []
+            for x in start:
+                if x[0]==end:
+                    if x[1]<mn:mn = x[1]
+                else:
+                    item = ((x[0][0][0],x[0][0][1],x[0][0][2]),(x[0][1][0],x[0][1][1],x[0][1][2]))
+                    if item not in s:
+                        s.add(item)
+                        
+                        if x[2][0]==0:
+                            tmp2 = [[x[0][0][0],x[0][0][1],x[0][0][2]],[x[0][1][0],x[0][1][1],x[0][1][2]]]
+                            tmp2[0][x[2][1]] = tmp2[1][x[2][1]] 
+                            tmp2[1][x[2][1]] = 0
+                            tmp.append([tmp2,x[1]+1,[1,x[2][1]]])
+                            
+                        if x[2][0]==1:
+                            tmp2 = [[x[0][0][0],x[0][0][1],x[0][0][2]],[x[0][1][0],x[0][1][1],x[0][1][2]]]
+                            tmp2[1][x[2][1]] = tmp2[0][x[2][1]] 
+                            tmp2[0][x[2][1]] = 0
+                            tmp.append([tmp2,x[1]+1,[0,x[2][1]]])
+                            
+                        if x[2][1]<2:
+                            tmp2 = [[x[0][0][0],x[0][0][1],x[0][0][2]],[x[0][1][0],x[0][1][1],x[0][1][2]]]
+                            tmp2[x[2][0]][x[2][1]]=tmp2[x[2][0]][x[2][1]+1]
+                            tmp2[x[2][0]][x[2][1]+1]=0
+                            tmp.append([tmp2,x[1]+1,[x[2][0],x[2][1]+1]])
+                            
+                        if x[2][1]>0:
+                            tmp2 = [[x[0][0][0],x[0][0][1],x[0][0][2]],[x[0][1][0],x[0][1][1],x[0][1][2]]]
+                            tmp2[x[2][0]][x[2][1]]=tmp2[x[2][0]][x[2][1]-1]
+                            tmp2[x[2][0]][x[2][1]-1]=0
+                            tmp.append([tmp2,x[1]+1,[x[2][0],x[2][1]-1]])
+            if tmp==[]:
+                if mn==999999999999999999:return -1
+                return mn
+            else:
+                start = tmp
+                        
+        
+        

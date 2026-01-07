@@ -1,0 +1,44 @@
+class Solution:
+    def numEnclaves(self, A: List[List[int]]) -> int:
+        
+        lim1 = len(A)
+        lim2 = len(A[0])
+        c = 0
+        for i in range(0,lim1):
+            for j in range(0,lim2):
+                
+                if A[i][j]==1:
+                    
+                    p = 0
+                    q = [[i,j]]
+                    fin = []
+                    while 1!=-1:
+                        tmp = []
+                        for x in q:
+                            if A[x[0]][x[1]]==1:
+                                fin.append(x)
+                                A[x[0]][x[1]]=2
+                                if x[0]==0 or x[0]==lim1-1 or x[1]==0 or x[1]==lim2-1:
+                                    p = 1
+                                    
+                                else:
+                                    if x[0]>0:
+                                        tmp.append([x[0]-1,x[1]])
+                                    if x[1]>0:
+                                        tmp.append([x[0],x[1]-1])
+                                    if x[0]<lim1-1:
+                                        tmp.append([x[0]+1,x[1]])
+                                    if x[1]<lim2-1:
+                                        tmp.append([x[0],x[1]+1])
+                        if tmp==[]:
+                            if p==0:
+                                c+=len(tmp)
+                            else:
+                                for x in fin:
+                                    A[x[0]][x[1]]=1
+                            break
+                        else:
+                            q = tmp
+        for x in A:
+            c+=x.count(2)
+        return c

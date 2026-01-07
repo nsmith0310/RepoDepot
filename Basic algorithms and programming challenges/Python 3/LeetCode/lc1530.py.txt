@@ -1,0 +1,65 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+from random import randint 
+class Solution:
+    def countPairs(self, root: TreeNode, distance: int) -> int:
+        
+        d = dict()
+        
+        if root==None:return 0
+        
+        tmp = [[root,None]]
+        
+        s = set()
+        
+        for x in tmp:
+            x[0].val = randint(0,10000000000000)
+
+            if x[0].left==None==x[0].right:
+                s.add(x[0].val)
+                
+            if x[1]!=None:
+                
+                try:
+                    d[x[0].val].append(x[1].val)
+                except:
+                    d[x[0].val]=[x[1].val]
+                    
+                try:
+                    d[x[1].val].append(x[0].val)
+                except:
+                    d[x[1].val]=[x[0].val]
+                    
+            if x[0].left!=None:
+                tmp.append([x[0].left,x[0]])
+            if x[0].right!=None:
+                tmp.append([x[0].right,x[0]])        
+        
+        if len(tmp)==1:return 0
+        c = 0
+        
+        for x in list(s):
+            s2 = set()
+            s2.add(x)
+            d2 = 0
+            tmp = d[x]
+            while 1!=-1:
+                
+                tmp2 = []
+                d2+=1
+                if d2>distance:break
+                    
+                for y in tmp:
+                    if y!=x and y in s:
+                        c+=1
+                    if y!=x and y not in s2:
+                        tmp2+=d[y]
+                        s2.add(y)
+                tmp = tmp2
+                ###print(tmp2)
+        return c//2

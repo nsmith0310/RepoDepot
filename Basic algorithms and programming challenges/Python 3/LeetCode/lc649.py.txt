@@ -1,0 +1,65 @@
+class Solution:
+    def predictPartyVictory(self, senate: str) -> str:
+        
+        senate = list(senate)
+        lim = len(senate)
+        r = 0
+        d = 0
+        
+        rq = []
+        dq = []
+        
+        for i in range(0,lim):
+            if senate[i]=="R":
+                r+=1
+                rq.append(i)
+            else:
+                d+=1
+                dq.append(i)
+        
+        while r>0 and d>0:
+            i = 0
+            
+            while i<lim:
+                if senate[i]=='R':
+                    t=0
+                    for j in range(0,d):
+                        if dq[j]>i:
+                            t = 1
+                            senate[dq[j]]='x'
+                            del dq[j]
+                            
+                            d-=1
+                            break
+                    if t==0:
+                        senate[dq[0]]='x'
+                        del dq[0]
+                        d-=1
+                
+                elif senate[i]=='D':
+                    
+                    t=0
+                    for j in range(0,r):
+                        if rq[j]>i:
+                            t = 1
+                            senate[rq[j]]='x'
+                            del rq[j]
+                            
+                            r-=1
+                            break
+                    if t==0:
+                        
+                        senate[rq[0]]='x'
+                        del rq[0]
+                        
+                        r-=1
+                
+                if d==0 or r==0:break
+                i+=1
+                  
+        if r==0:return "Dire"
+        return "Radiant"
+                            
+                
+
+        

@@ -1,0 +1,22 @@
+class Solution:
+    def lenLongestFibSubseq(self, A: List[int]) -> int:
+        
+        s = set(A)
+        
+        lim = len(A)
+        mx = 0
+        for i in range(0,lim):
+            for j in range(i+1,lim):
+                c = 1
+                n1 = A[i]
+                n2 = A[j]
+                while n2 in s:
+                    n = n1
+                    n1 = n2
+                    n2+=n
+                    c+=1
+        
+                if c>mx:
+                    mx = c
+        if mx>=3:return mx
+        return 0

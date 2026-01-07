@@ -1,0 +1,54 @@
+class Solution:
+    def orderOfLargestPlusSign(self, N: int, mines: List[List[int]]) -> int:
+        
+        m = [[0 for i in range(0,N)] for j in range(0,N)]
+        
+        
+        for x in mines:
+            m[x[0]][x[1]]=1
+                
+        arrl = [[1 for i in range(0,N)] for j in range(0,N)]
+        arrr = [[1 for i in range(0,N)] for j in range(0,N)]
+        arru = [[1 for i in range(0,N)] for j in range(0,N)]
+        arrd = [[1 for i in range(0,N)] for j in range(0,N)]
+        
+        for i in range(0,N):
+            for j in range(0,N):
+                if m[i][j]!=1:
+                    if j>0:
+                        arrr[i][j]=1+arrr[i][j-1]
+                else:
+                    arrr[i][j]=0              
+        for i in range(0,N):
+            for j in range(N-1,-1,-1):
+                if m[i][j]!=1:
+                    if j<N-1:
+                        arrl[i][j]=1+arrl[i][j+1]
+                else:
+                    arrl[i][j]=0 
+
+        for j in range(0,N): 
+            for i in range(N-1,-1,-1):
+                if m[i][j]!=1:
+                    if i<N-1:
+                        arru[i][j]=1+arru[i+1][j]
+                else:
+                    arru[i][j]=0 
+                    
+                    
+        for j in range(0,N):
+            for i in range(0,N):
+                if m[i][j]!=1:
+                    if i>0:
+                        arrd[i][j]=1+arrd[i-1][j]
+                else:
+                    arrd[i][j]=0 
+                    
+        
+        mx = 0
+        for i in range(0,N):
+            for j in range(0,N):
+                val = min(arrl[i][j],arrr[i][j],arru[i][j],arrd[i][j])
+                if val>mx:mx = val
+                    
+        return mx

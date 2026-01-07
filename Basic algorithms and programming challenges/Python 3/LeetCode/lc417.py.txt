@@ -1,0 +1,56 @@
+class Solution:
+    def pacificAtlantic(self, matrix: List[List[int]]) -> List[List[int]]:        
+        lim1 = len(matrix)
+        if lim1==0:return []
+        lim2 = len(matrix[0])
+        if lim2==0:return []
+        d = dict()
+        for i in range(0,lim1):
+            for j in range(0,lim2):
+                val = (i,j)
+                d[val]=[]                
+                if i>0:
+                    d[val].append((i-1,j))
+                if j>0:
+                    d[val].append((i,j-1))
+                if i<lim1-1:
+                    d[val].append((i+1,j))
+                if j<lim2-1:
+                    d[val].append((i,j+1))        
+        def r(val,t):
+            if t=='p':
+                
+                if pac[val[0]][val[1]]==-1:
+                    pac[val[0]][val[1]]=1
+                    for x in d[val]:
+                        if matrix[val[0]][val[1]]<=matrix[x[0]][x[1]]:
+                            r(x,'p')                  
+            else:                
+                if atl[val[0]][val[1]]==-1:
+                    atl[val[0]][val[1]]=1
+                    for x in d[val]:
+                        if matrix[val[0]][val[1]]<=matrix[x[0]][x[1]]:
+                            r(x,'a')                
+        t1 = set()
+        t2 = set()        
+        for i in range(0,lim1):
+            t1.add((i,0))
+        for j in range(0,lim2):
+            t1.add((0,j))            
+        for i in range(0,lim1):
+            t2.add((i,lim2-1))
+        for j in range(0,lim2):
+            t2.add((lim1-1,j))                
+        pac = [[-1 for k in range(0,lim2)] for l in range(0,lim1)]
+        atl = [[-1 for k in range(0,lim2)] for l in range(0,lim1)]        
+        for x in t1:
+            r(x,'p')            
+        for x in t2:
+            r(x,'a')
+        f = []        
+        for i in range(0,lim1):
+            for j in range(0,lim2):
+                if pac[i][j]==atl[i][j]==1:
+                    f.append([i,j])   
+        return f
+            

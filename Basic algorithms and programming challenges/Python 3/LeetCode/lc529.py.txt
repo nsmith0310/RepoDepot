@@ -1,0 +1,74 @@
+class Solution:
+    def updateBoard(self, board: List[List[str]], click: List[int]) -> List[List[str]]:
+        
+        if board[click[0]][click[1]]=='M':
+            board[click[0]][click[1]]='X'
+            return board
+        
+        lim1 = len(board)
+        lim2 = len(board[0])
+        
+        q = [click]
+        
+            
+        s = set()
+        
+        
+        for x in q:
+            
+            count = 0
+            tmp = []
+                
+            if x[0]>=1:
+                if board[x[0]-1][x[1]]=='M':
+                    count+=1
+                tmp.append([x[0]-1,x[1]])
+                    
+            if x[1]>=1:
+                if board[x[0]][x[1]-1]=='M':
+                    count+=1
+                tmp.append([x[0],x[1]-1])
+                    
+            if x[0]<lim1-1:
+                if board[x[0]+1][x[1]]=='M':
+                    count+=1
+                tmp.append([x[0]+1,x[1]])
+                    
+            if x[1]<lim2-1:
+                if board[x[0]][x[1]+1]=='M':
+                    count+=1
+                tmp.append([x[0],x[1]+1])
+                    
+            if x[0]>=1 and x[1]>=1:
+                if board[x[0]-1][x[1]-1]=='M':
+                    count+=1
+                tmp.append([x[0]-1,x[1]-1])
+                    
+            if x[0]<lim1-1 and x[1]<lim2-1:
+                if board[x[0]+1][x[1]+1]=='M':
+                    count+=1
+                tmp.append([x[0]+1,x[1]+1])
+                    
+            if x[0]<lim1-1 and x[1]>=1:
+                if board[x[0]+1][x[1]-1]=='M':
+                    count+=1
+                tmp.append([x[0]+1,x[1]-1])
+                    
+            if x[1]<lim2-1 and x[0]>=1:
+                if board[x[0]-1][x[1]+1]=='M':
+                    count+=1
+                tmp.append([x[0]-1,x[1]+1])
+            
+            val = str(x[0])+'.'+str(x[1])
+            if count==0:
+                board[x[0]][x[1]]='B'
+                if val not in s:
+                    s.add(val)
+                    q+=tmp
+            else:
+                board[x[0]][x[1]]=str(count)
+            
+        return board
+                    
+                    
+                    

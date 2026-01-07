@@ -1,0 +1,44 @@
+class Solution:
+    def knightDialer(self, N: int) -> int:
+        arr = []
+        arr2 = [0,0,0,0,0,0,0,0,0,0]
+        arr3 = [[0 for i in range(0,N)] for j in range(0,10)]
+        
+        if N==1:return 10
+        
+        arr.append([4,6])
+        arr.append([6,8])
+        arr.append([7,9])
+        arr.append([4,8])
+        arr.append([0,9,3])
+        arr.append([])
+        arr.append([0,1,7])
+        arr.append([2,6])
+        arr.append([1,3])
+        arr.append([2,4])
+        
+        def ret(num,n):
+            
+            ###print(num,n)
+            if arr3[num][n]!=0:return arr3[num][n]
+            t=0
+             
+            tmp = arr[num]
+            
+            if n==N-1: 
+                arr3[num][n] = 1
+                return 1
+            ###print(tmp)    
+            for x in tmp:
+                m = ret(x,n+1)
+                t+=m
+                arr3[num][n] =m
+            arr3[num][n] = t
+            return t
+        
+        mx = 0
+        
+        for i in range(0,10):
+            mx+=ret(i,0)
+        ###print(arr3)
+        return mx%(10**9 + 7)

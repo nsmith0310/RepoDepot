@@ -1,0 +1,42 @@
+
+class Solution:
+    def removeStones(self, stones: List[List[int]]) -> int:
+        
+        r = dict()
+        c = dict()
+        lim = len(stones)
+        for i in range(0,lim):
+            t = tuple(stones[i])
+            try:
+                r[t[0]].append(t)
+            except:
+                r[t[0]]=[t]
+                
+            try:
+                c[t[1]].append(t)
+            except:
+                c[t[1]]=[t]
+            stones[i]=t
+            
+        
+        
+        def f(val):
+            if val not in s:
+                s.add(val)
+                ct=1
+                for x in r[val[0]]:
+                    if x!=val:
+                        ct+=f(x)
+                for x in c[val[1]]:
+                    if x!=val:
+                        ct+=f(x)
+                return ct
+            else:
+                return 0
+        mx = 0
+        s = set()
+        for i in range(0,lim):
+               
+            val =max(0,f(stones[i])-1)
+            mx += val
+        return mx

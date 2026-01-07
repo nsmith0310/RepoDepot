@@ -1,0 +1,11 @@
+class Solution:
+    def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
+        
+        l = sorted(arr)
+        lim = len(l)
+        
+        val = abs(l[0]-l[1])
+        
+        for i in range(0,len(l)-1):
+            if abs(l[i]-l[i+1])!=val:return False
+        return True

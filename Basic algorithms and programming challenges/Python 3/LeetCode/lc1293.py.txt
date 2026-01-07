@@ -1,0 +1,146 @@
+class Solution:
+    def shortestPath(self, grid: List[List[int]], k: int) -> int:
+        
+        d = dict()
+        
+        m = len(grid)
+        n = len(grid[0])
+        
+        arr = []
+        
+        for i in range(0,m):
+            arr.append([])
+            for j in range(0,n):
+                arr[-1].append(-1)
+                val = (i,j)
+                d[val]=[]
+                if i>0:
+                    d[val].append((i-1,j))
+                if j>0:
+                    d[val].append((i,j-1))
+                    
+                if i<m-1:
+                    d[val].append((i+1,j))
+                if j<n-1:
+                    d[val].append((i,j+1))
+                    
+        if grid[0][0]==1:
+            k-=1
+        
+        start = [[(0,0),0,k]]
+        mn = 999999999999
+        q = []
+        while 1!=-1:
+            tmp = []
+            
+            for x in start:
+                ###print(x)
+                if x[0]==(m-1,n-1):
+                    if x[1]<mn:
+                        mn = x[1]
+                        break
+                else:
+                    if arr[x[0][0]][x[0][1]]==-1:
+                        arr[x[0][0]][x[0][1]]=1
+                        for y in d[x[0]]:
+                            
+
+                            if grid[y[0]][y[1]]==1:
+                                if x[2]>0:
+                                    tmp.append([y,x[1]+1,x[2]-1])
+                                    
+
+                            else:
+                                tmp.append([y,x[1]+1,x[2]])
+                                    
+                                
+            if tmp==[] :
+                break
+            
+            else:
+                tmp.sort(key=lambda x: x[2])
+                start = tmp
+        
+        arr=[[-1 for i in range(0,n)] for j in range(0,m)]
+        start = [[(0,0),0,k]]
+        
+        q = []
+        while 1!=-1:
+            tmp = []
+            
+            for x in start:
+                ###print(x)
+                if x[0]==(m-1,n-1):
+                    if x[1]<mn:
+                        mn = x[1]
+                        break
+                else:
+                    if arr[x[0][0]][x[0][1]]==-1:
+                        arr[x[0][0]][x[0][1]]=1
+                        for y in d[x[0]]:
+                            
+
+                            if grid[y[0]][y[1]]==1:
+                                if x[2]>0:
+                                    tmp.append([y,x[1]+1,x[2]-1])
+                                    
+
+                            else:
+                                tmp.append([y,x[1]+1,x[2]])
+                                    
+                                
+            if tmp==[] :
+                break
+            
+            else:
+                tmp.sort(key=lambda x: x[2],reverse=True)
+                start = tmp
+                
+        arr=[[-1 for i in range(0,n)] for j in range(0,m)]
+        start = [[(0,0),0,k]]
+        
+        q = []
+        while 1!=-1:
+            tmp = []
+            
+            for x in start:
+                ###print(x)
+                if x[0]==(m-1,n-1):
+                    if x[1]<mn:
+                        mn = x[1]
+                        break
+                else:
+                    if arr[x[0][0]][x[0][1]]==-1:
+                        arr[x[0][0]][x[0][1]]=1
+                        for y in d[x[0]]:
+                            
+
+                            if grid[y[0]][y[1]]==1:
+                                if x[2]>0:
+                                    q.append([y,x[1]+1,x[2]-1])
+                                    
+
+                            else:
+                                tmp.append([y,x[1]+1,x[2]])
+                                    
+                                
+            if tmp==[] and q==[]:
+                break
+            
+            elif tmp==[]:
+                
+                start = [q.pop()]
+            else:
+                start = tmp
+                
+        if mn==999999999999:return -1
+        return mn
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            

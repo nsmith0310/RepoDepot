@@ -1,0 +1,15 @@
+class Solution:
+    def getLastMoment(self, n: int, left: List[int], right: List[int]) -> int:
+        
+        if left!=[]:
+            left.sort()
+        else:
+            return n-min(right)
+        if right!=[]:
+            right.sort()
+        else:
+            return max(left)
+        
+        
+        return max(left[-1],n-right[0])
+        

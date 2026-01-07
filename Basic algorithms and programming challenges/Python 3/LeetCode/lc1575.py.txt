@@ -1,0 +1,25 @@
+from functools import lru_cache
+class Solution:
+    def countRoutes(self, locations: List[int], start: int, finish: int, fuel: int) -> int:
+        
+        
+        
+        lim = len(locations)
+        @lru_cache(None)
+        def r(i,f):
+            if f<0:
+                return 0
+           
+            else:
+                
+                c = 0
+                if i==finish:
+                    c+=1
+                for j in range(0,lim):
+                    
+                    if j!=i:
+                        
+                        c+=r(j,f-abs(locations[i]-locations[j]))
+                return c
+            
+        return r(start,fuel)%(10**9 + 7)

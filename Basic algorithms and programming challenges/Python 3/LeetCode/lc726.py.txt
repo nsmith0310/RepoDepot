@@ -1,0 +1,94 @@
+class Solution:
+    def countOfAtoms(self, formula: str) -> str:
+        
+        def helper(s,idx):
+            c = 0
+            for i in range(0,len(s)):
+                if s[i]=="(":
+                    c+=1
+                elif s[i]==")":
+                    c-=1
+                if c==0:
+                    return [s[1:i],i+idx]
+        def getnum(s,idx):
+           
+            tmp = "0"
+            for i in range(0,len(s)):
+                if ord(s[i])<48 or ord(s[i])>57:
+    
+                    return [int(tmp),i+idx]
+                else:
+                    tmp+=s[i] 
+            return [int(tmp),i+idx]
+        
+        d = dict()
+        def r(s):
+            
+            f = []
+            q = []
+            i = 0
+            while i<len(s):
+                
+                if s[i].isupper():
+                    
+                    tmp = s[i]
+                    tmp2 = -1
+                    for j in range(i+1,len(s)):
+                        val = ord(s[j])
+                        if val<97 or val>122:
+                            tmp2 = getnum(s[j:],j)
+                            break
+                        else:
+                            tmp+=s[j]
+                    
+                    if tmp2!=-1:
+                        q.append([tmp,max(1,tmp2[0])])
+                        i = tmp2[1]
+                    else:
+                        q.append([tmp,1])
+                        i+=1
+                elif s[i]=="(":
+                    tmp = helper(s[i:],i)
+                    num = getnum(s[tmp[1]+1:],tmp[1]+1)
+                    
+                    q2 = r(tmp[0])
+                    val = max(1,num[0])
+                    for x in q2:
+                        q.append([x[0],x[1]*val])
+                    i = num[1]
+                    
+                else:
+                    i+=1
+                    
+                                            
+            for x in q:
+                f.append(x)
+            return f
+        
+        x = r(formula)
+        d = dict()
+        
+        f = []
+        for y in x:
+            try:
+                d[y[0]]+=y[1]
+            except:
+                d[y[0]]=y[1]
+        
+        for x in d:
+            f.append([x,d[x]])
+            
+        f.sort(key=lambda x: x[0])
+        
+        f2 = ""
+        
+        for x in f:
+            if x[1]>1:
+                f2+=x[0]+str(x[1])
+            else:
+                f2+=x[0]
+        return f2
+        
+                
+                    
+                

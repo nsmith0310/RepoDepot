@@ -1,0 +1,64 @@
+class Solution:
+    def longestSubarray(self, nums: List[int], limit: int) -> int:
+        
+        lim = len(nums)
+        mx = nums[0]
+        mn = nums[0]
+        
+        arr = [nums[0]]
+        lth = 1
+        r = 1
+        
+        d = dict()
+        
+        d[nums[0]]=1
+        
+        i = 1
+        while i<lim:
+            j = i
+            while j<lim:
+                if abs(mx-mn)>limit:
+                    
+                    break
+                else:
+                    if mn>nums[j]:
+                        mn = nums[j]
+                    if mx<nums[j]:
+                        mx = nums[j]
+                    arr.append(nums[j])
+                    try:
+                        d[nums[j]]+=1
+                    except:
+                        d[nums[j]]=1
+                    lth+=1
+                    j+=1
+            if lth-1>r:r = lth-1
+            k = i
+            while k<lim:
+                if abs(mx-mn)<=limit:
+                    break
+                else:
+                    tmp = arr[0]
+                    del arr[0]
+                    d[tmp]-=1
+                    if d[tmp]==0:
+                        del d[tmp]
+                    lth-=1
+                    if tmp==mn:
+                        if tmp in d:
+                            pass
+                        else:
+                            mn = min(arr)
+                            
+                    if tmp==mx:
+                        if tmp in d:
+                            pass
+                        else:
+                            mx = max(arr)
+                    
+                    k+=1
+            ###print(arr)
+            i = j
+        if abs(mx-mn)<=limit:
+            if lth>r:r = lth
+        return r

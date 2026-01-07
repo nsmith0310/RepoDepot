@@ -1,0 +1,33 @@
+from functools import lru_cache
+class Solution:
+    def minimumDeleteSum(self, s1: str, s2: str) -> int:
+        
+        lim1 = len(s1)
+        lim2 = len(s2)
+        @lru_cache(None)
+        def r(i,j):
+            
+            if i==lim1 or j==lim2:
+                if i==lim1 and j==lim2:
+                    
+                    return 0
+                elif i==lim1:
+                    tmp = 0
+                    for k in range(j,lim2):
+                        tmp+=ord(s2[k])
+                    return tmp
+                else:
+                    tmp = 0
+                    for k in range(i,lim1):
+                        tmp+=ord(s1[k])
+                    return tmp
+            t = 0
+            
+            if s1[i]!=s2[j]:
+                
+                t+=min(ord(s1[i])+r(i+1,j),ord(s2[j])+r(i,j+1))
+            else:
+                t+=r(i+1,j+1)
+            return t
+        
+        return r(0,0)

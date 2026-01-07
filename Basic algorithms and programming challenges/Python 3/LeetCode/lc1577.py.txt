@@ -1,0 +1,37 @@
+from itertools import combinations as c
+
+class Solution:
+    def numTriplets(self, nums1: List[int], nums2: List[int]) -> int:
+        t = 0
+        
+        d1= dict()
+        
+        for x in nums1:
+            try:
+                d1[x**2]+=1
+            except:
+                d1[x**2]=1
+                
+        d2= dict()
+        
+        for x in nums2:
+            try:
+                d2[x**2]+=1
+            except:
+                d2[x**2]=1
+        
+        
+        for x in list(c(nums1,2)):
+            val = x[1]*x[0]
+            if (1.0*val).is_integer():
+                if val in d2:
+                    t+=d2[val]
+                    
+                    
+        for x in list(c(nums2,2)):
+            val = x[1]*x[0]
+            if (1.0*val).is_integer():
+                if val in d1:
+                    t+=d1[val]
+                    
+        return t

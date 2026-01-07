@@ -1,0 +1,23 @@
+class Solution:
+    def circularPermutation(self, n: int, start: int) -> List[int]:
+        
+        s = 1
+        vals = ['0','1']
+        lim = 2
+        while s<n:
+            vals2 = vals[::-1]
+            
+            for i in range(0,lim):
+                vals[i]='0'+vals[i]
+                vals2[i]='1'+vals2[i]
+            
+            lim*=2
+            vals+=vals2
+            s+=1
+        k = [int(x,2) for x in vals]
+        
+        k2 = []
+        while k[0]!=start:
+            k2.append(k[0])
+            del k[0]
+        return k+k2

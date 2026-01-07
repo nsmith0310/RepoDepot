@@ -1,0 +1,26 @@
+class Solution:
+    def minCost(self, s: str, cost: List[int]) -> int:
+        
+        
+        t = 0
+        lim = len(s)
+        i = 0
+        
+        while i<lim-1:
+            if s[i]==s[i+1]:
+                mx = cost[i]
+                tmp = cost[i]
+                j = i+1
+                while j<lim:
+                    if s[j]==s[i]:
+                        if cost[j]>mx:
+                            mx = cost[j]
+                        tmp+=cost[j]
+                        j+=1
+                    else:
+                        break
+                t+=tmp-mx
+                i = j
+            else:
+                i+=1
+        return t

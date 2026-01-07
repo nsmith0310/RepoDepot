@@ -1,0 +1,72 @@
+from copy import copy
+
+
+class Solution:
+    def __init__(self):
+        self.tab = []
+    
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        
+        def r(x,c,s,li,lj,lim):
+            if x[0]<li-1 and x[1]<lj-1 and self.tab[x[0]][x[1]]==1:
+                return False
+            if c==lim-1: 
+                
+                self.flip = 1
+                return True
+            
+            if x[0]>0:
+                if str(x[0]-1)+'.'+str(x[1]) not in s and word[c+1] == board[x[0]-1][x[1]]:
+                    
+                    s.add(str(x[0]-1)+'.'+str(x[1]))
+                    
+                    r([x[0]-1,x[1]],c+1,s,li,lj,lim)
+                    s.remove(str(x[0]-1)+'.'+str(x[1]))
+            if x[1]>0:
+                if str(x[0])+'.'+str(x[1]-1) not in s and word[c+1] == board[x[0]][x[1]-1]:
+                    
+                    s.add(str(x[0])+'.'+str(x[1]-1))
+                    
+                    r([x[0],x[1]-1],c+1,s,li,lj,lim)
+                    s.remove(str(x[0])+'.'+str(x[1]-1))
+            if x[0]<li-1:
+                
+                if str(x[0]+1)+'.'+str(x[1]) not in s and word[c+1] == board[x[0]+1][x[1]]:
+                    
+                    s.add(str(x[0]+1)+'.'+str(x[1]))
+                    
+                    r([x[0]+1,x[1]],c+1,s,li,lj,lim)
+                    s.remove(str(x[0]+1)+'.'+str(x[1]))
+            if x[1]<lj-1:
+                if str(x[0])+'.'+str(x[1]+1) not in s and word[c+1] == board[x[0]][x[1]+1]:
+                    
+                    s.add(str(x[0])+'.'+str(x[1]+1))
+                    
+                    r([x[0],x[1]+1],c+1,s,li,lj,lim)
+                    s.remove(str(x[0])+'.'+str(x[1]+1))
+            if c>=50:     
+                self.tab[x[0]][x[1]]=1        
+            return False
+            
+        
+        len1 = len(board)
+        len2 = len(board[0])
+        
+        self.tab = [[0 for i in range(0,len2)] for j in range(0,len1)]
+        ###print(self.tab)
+        
+        
+        lim = len(word)
+        
+        self.flip = 0
+        for i in range(0,len(board)):
+            for j in range(0,len(board[i])):
+                if board[i][j]==word[0]:
+                    s = set()
+                    s.add(str(i)+'.'+str(j))
+                    r([i,j],0,s,len1,len2,lim)
+                    
+                    if self.flip==1:return True
+        print(self.tab)             
+        return False
+                

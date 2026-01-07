@@ -1,0 +1,38 @@
+class Solution:
+    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
+        
+       
+        g = set()
+        d = dict()
+        
+        for x in pairs:
+            g.add(x[0])
+            g.add(x[1])
+            try:
+                d[x[0]].append(x[1])
+            except:
+                d[x[0]] = [x[1]]
+            try:
+                d[x[1]].append(x[0])
+            except:
+                d[x[1]] = [x[0]]
+                      
+        def r(i,l):
+            if i in d:
+                
+                l.append(i)
+                
+                for y in d.pop(i):
+                    r(y,l)
+        
+        
+        f = list(s)
+        for x in g:
+            if x in d:
+                l = []
+                r(x,l)
+                l2,l3 = sorted(l),sorted([s[i] for i in l])
+                for i in range(0,len(l3)):
+                    f[l2[i]]=l3[i]
+                
+        return ''.join(f)

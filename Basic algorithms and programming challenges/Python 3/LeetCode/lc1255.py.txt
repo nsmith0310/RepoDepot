@@ -1,0 +1,39 @@
+from itertools import combinations as c
+from copy import copy
+class Solution:
+    def maxScoreWords(self, words: List[str], letters: List[str], score: List[int]) -> int:
+        
+        lim = len(words)
+        
+        arr = [0 for i in range(0,26)]
+        
+        for i in range(0,len(letters)):
+            arr[ord(letters[i])-97]+=1
+            
+        pos = []
+        
+        for i in range(1,lim+1):
+            pos+=list(c(words,i))
+            
+        mx = 0
+        
+        for x in pos:
+            
+            tmp = copy(arr)
+            s = 0
+            t = 0
+            for y in x:
+                
+                for i in range(0,len(y)):
+                    tmp[ord(y[i])-97]-=1
+                    if tmp[ord(y[i])-97]<0:
+                        t = 1
+                        break
+                    else:
+                        s+=score[ord(y[i])-97]
+                if t==1:
+                    break
+            if t==0:
+                if s>mx:mx = s
+        return mx
+            

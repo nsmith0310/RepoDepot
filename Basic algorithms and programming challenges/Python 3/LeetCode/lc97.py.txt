@@ -1,0 +1,38 @@
+from functools import lru_cache
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+      
+        self.l1 = len(s1)
+        self.l2 = len(s2)
+        self.l3 = len(s3)
+        
+        if self.l1+self.l2!=self.l3:return False
+        if s1=="" and s2=="":return s3==""
+        if s1=="":return s2==s3
+        if s2=="":return s1==s3
+            
+        self.t = 0
+        @lru_cache(None)
+        def r(s,i,j,k,c):
+            if c==self.l3 and s==s3:
+                
+                self.t=1
+                return True
+            elif k<self.l3:
+                if i<self.l1:
+                    if s1[i]==s3[k]:
+                        val = r(s+s1[i],i+1,j,k+1,c+1)                        
+                        if val==True:return True
+                    elif j<self.l2 and s2[j]==s3[k]:
+                        
+                        val = r(s+s2[j],i,j+1,k+1,c+1)
+                        if val==True:return True
+                if j<self.l2:
+                    if s2[j]==s3[k]:
+                        val = r(s+s2[j],i,j+1,k+1,c+1)
+                        if val==True:return True
+                    elif i<self.l1 and s1[i]==s3[k]:
+                        val = r(s+s1[i],i+1,j,k+1,c+1)
+                        if val==True:return True
+        r("",0,0,0,0)
+        return self.t==1

@@ -1,0 +1,59 @@
+class Solution:
+    def shortestAlternatingPaths(self, n: int, red_edges: List[List[int]], blue_edges: List[List[int]]) -> List[int]:
+        
+        d = dict()
+        
+        for x in red_edges:
+            try:
+                d[x[0]].append([x[1],'r'])
+            except:
+                d[x[0]]=[[x[1],'r']]
+                
+        for x in blue_edges:
+            try:
+                d[x[0]].append([x[1],'b'])
+            except:
+                d[x[0]]=[[x[1],'b']]
+                
+                
+        ans = [99999999999]*n
+        
+        start = [[0,0]]
+        arr = [0]*n
+        p = 0
+        k = 0
+        while 1!=-1:
+            tmp1 = [x for x in ans]
+            
+            tmp = []
+            if ans[0]==0:
+                
+                for x in start:
+                    if x[1]<ans[x[0]]:
+                        ans[x[0]]=x[1]
+                    if x[0] in d:
+                        for y in d[x[0]]:
+                            if x[2]!=y[1]:
+                                tmp.append([y[0],x[1]+1,y[1]])
+                                ###print(x[2],y[1])
+                        
+            else:
+               
+                for x in start:
+                    if x[1]<ans[x[0]]:
+                        ans[x[0]]=x[1]
+                    if x[0] in d:
+                        for y in d[x[0]]:
+                            tmp.append([y[0],x[1]+1,y[1]])
+            if ans==tmp1:
+                k+=1
+            if tmp==[] or k==5:
+                break
+            else:
+                
+                start = tmp
+                
+        for i in range(0,n):
+            if ans[i]==99999999999:
+                ans[i]=-1
+        return ans

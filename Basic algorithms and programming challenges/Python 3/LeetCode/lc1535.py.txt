@@ -1,0 +1,25 @@
+class Solution:
+    def getWinner(self, arr: List[int], k: int) -> int:
+        
+        lim = len(arr)
+        
+        if k>=lim:return max(arr)
+        
+        d = dict()
+        
+        for x in arr:
+            d[x]=0
+            
+        while 1!=-1:
+            if arr[0]>arr[1]:
+                d[arr[0]]+=1
+                if d[arr[0]]==k:return arr[0]
+                tmp = arr[1]
+                del arr[1]
+                arr.append(tmp)
+            else:
+                d[arr[1]]+=1
+                if d[arr[1]]==k:return arr[1]
+                tmp = arr[0]
+                del arr[0]
+                arr.append(tmp)

@@ -1,0 +1,24 @@
+from math import floor
+class Solution:
+    def numFriendRequests(self, ages: List[int]) -> int:
+        lim = len(ages)
+        arr = [0 for i in range(0,121)]
+        
+        t = 0
+        for i in range(0,lim):
+            arr[ages[i]]+=1
+            
+        for j in range(120,0,-1):
+            if arr[j]!=0:
+                mn = floor(.5*j + 7)
+               
+                val = max(0,sum(arr[mn+1:j]))
+                
+                if mn<j:
+                    t+=(val*arr[j]) + (arr[j]*(arr[j]-1))
+                else:
+                    t+=(val*arr[j])
+
+        return t
+            
+            

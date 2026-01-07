@@ -1,0 +1,62 @@
+from itertools import combinations as c
+class Solution:
+    def makesquare(self, nums: List[int]) -> bool:
+        
+        nums.sort()
+        
+        
+        val = sum(nums)
+        
+        if val%4==0:
+            val//=4
+        else:
+            return False
+        
+        lim = len(nums)
+        if lim<4: return False
+        if max(nums)>val:return False
+        
+        d = dict()
+        
+        for x in list(set(nums)):
+            d[x]=nums.count(x)
+        
+        pos = []
+        
+        for i in range(1,lim-2):
+            vals = list(c(nums,i))
+            
+            for x in vals:
+                if sum(x)==val:
+                    pos.append(list(x))
+                    
+        lim2 = len(pos)
+        if lim2<4:return False
+        
+        arr = [0 for i in range(0,lim2)]
+        
+        def r(x,j):
+            if j<lim2 and arr[j]==1:return False
+            if sorted(x)==nums:
+                
+                return True
+            else:   
+                for i in range(j,lim2):
+                    tmp = x+pos[j]
+                    t = 0
+                    for y in list(set(tmp)):
+                        if d[y]<tmp.count(y):
+                            t = 1
+                            break
+                    
+                    if t==0:
+                        v = r(x+pos[j],j+1)
+                        if v==True:return True
+                    else:
+                        v = r(x,j+1)
+                        if v==True:return True
+                j = min(j,lim2-1)
+                arr[j]=1
+                return False
+       
+        return r(pos[0],0)

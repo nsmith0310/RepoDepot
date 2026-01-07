@@ -1,0 +1,32 @@
+class Solution:
+    def minimumLengthEncoding(self, words: List[str]) -> int:
+        
+        l = list(set(words))
+        
+        d = dict()
+        
+        for x in l:
+            try:
+                d[x[-1]].append(x)
+            except:
+                d[x[-1]] = [x]
+        t = 0
+        for x in d:
+            d[x].sort(key = lambda y: len(y))
+            f = set()
+            for i in range(0,len(d[x])):
+                limi = len(d[x][i])
+                for j in range(0,len(d[x])):
+                    if d[x][i]!=d[x][j]:
+                        limj = len(d[x][j])
+                        if limj>=limi:
+                            ind = limj-limi
+                            
+                            if d[x][j][ind:]==d[x][i]:
+                                f.add(d[x][i])
+                                break
+            print(f)
+            f2 = list(set(d[x])-f)
+            for z in f2:
+                t+=len(z)+1
+        return t

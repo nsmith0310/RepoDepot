@@ -1,0 +1,48 @@
+class Solution:
+    
+    def maxDistance(self, grid: List[List[int]]) -> int:
+        
+        lim = len(grid)
+        q = 0
+        l = []
+        l2 = []
+        for i in range(0,lim):
+            for j in range(0,lim):
+                if grid[i][j]==1:
+                    l.append([i,j])
+                    l2.append([i,j])
+                else:
+                    q = 1
+                    
+        if l==[] or q==0: return -1
+        
+        arr = [[-1 for i in range(0,lim)] for j in range(0,lim)]
+        
+        while 1!=-1:
+            tmp = []
+            t = 0
+            for x in l:
+                if x[0]>0 and arr[x[0]-1][x[1]]==-1 and grid[x[0]-1][x[1]]==0:
+                    arr[x[0]-1][x[1]]=1
+                    tmp.append([x[0]-1,x[1]])
+                    t = 1
+                if x[1]>0 and arr[x[0]][x[1]-1]==-1 and grid[x[0]][x[1]-1]==0:
+                    arr[x[0]][x[1]-1]=1
+                    tmp.append([x[0],x[1]-1])
+                    t = 1
+                if x[0]<lim-1 and arr[x[0]+1][x[1]]==-1 and grid[x[0]+1][x[1]]==0:
+                    arr[x[0]+1][x[1]]=1
+                    tmp.append([x[0]+1,x[1]])
+                    t = 1
+                if x[1]<lim-1 and arr[x[0]][x[1]+1]==-1 and grid[x[0]][x[1]+1]==0:
+                    arr[x[0]][x[1]+1]=1
+                    tmp.append([x[0],x[1]+1])
+                    t = 1
+            if t==1:
+                l = tmp
+            else:
+                val = l[-1]
+                print(val)
+                l2.sort(key = lambda x: abs(val[0]-x[0])+abs(val[1]-x[1]))
+                return abs(val[0]-l2[0][0])+abs(val[1]-l2[0][1])
+                

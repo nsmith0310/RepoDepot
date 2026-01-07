@@ -1,0 +1,54 @@
+from itertools import combinations as c
+
+class Solution:
+    def minAreaRect(self, points: List[List[int]]) -> int:
+        
+        points.sort(key=lambda x: x[0])
+        mn = 999999999999999
+        
+        x = dict()
+        
+        a = dict()
+        
+        for z in points:
+            st = str(z[0])+'.'+str(z[1])
+            try:
+                x[z[0]].add(z[1])
+            except:
+                x[z[0]] = set()
+                x[z[0]].add(z[1])
+                
+            
+            a[st]=1
+        
+        
+        for y in x:
+            for z in x:
+                
+                if z>y:
+                    
+                    
+                    
+                    tmp = list(x[z]-(x[z]-x[y]))
+                    
+                    tmp2 = []
+                    if len(tmp)>=2:
+                        tmp.sort()
+                        vals = sorted([y,z])
+                        
+                        tmp2 = list(c(tmp,2))
+                        
+                        for q in tmp2:
+                            
+                            ###print(vals,q)
+                            if str(vals[0])+'.'+str(q[0]) in a and str(vals[1])+'.'+str(q[1]) in a:
+                                num = (vals[1]-vals[0])*(q[1]-q[0])
+                                if num<mn:mn = num
+                                    
+        if mn==999999999999999:return 0
+        return mn
+                            
+                            
+                            
+                            
+                            

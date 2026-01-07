@@ -1,0 +1,35 @@
+class Solution:
+    def unhappyFriends(self, n: int, preferences: List[List[int]], pairs: List[List[int]]) -> int:
+        
+        arr = [-1]*n
+        arr2 = [-1]*n
+        t = 0
+        
+        d = dict()
+        c = 0
+        for x in preferences:
+            d[c]=dict()
+            for i in range(0,n-1):
+                d[c][x[i]]=i
+                
+            c+=1
+        
+        for x in pairs:
+            arr[x[0]]=x[1]
+            arr[x[1]]=x[0]
+            
+        c = 0
+        for x in preferences:
+            
+                
+            for y in x:
+                if y==arr[c]:
+                    break
+                if d[c][y]<d[c][arr[c]] and d[y][c]<d[y][arr[y]]:
+                    t+=1
+                    break
+            c+=1
+        return t
+                
+            
+            

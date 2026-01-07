@@ -1,0 +1,23 @@
+class Solution:
+    def fourSumCount(self, A: List[int], B: List[int], C: List[int], D: List[int]) -> int:
+        
+        c = 0
+        d = dict()
+        l = []
+        
+        for x in A:
+            for y in B:
+                try:
+                    d[x+y]+=1
+                except:
+                    d[x+y]=1
+        
+        for x in C:
+            for y in D:
+                b = -1*(x+y)
+                try:
+                    c+=d[b]
+                except:
+                    pass
+        return c
+                    

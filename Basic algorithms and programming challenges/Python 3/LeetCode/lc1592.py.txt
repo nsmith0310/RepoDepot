@@ -1,0 +1,32 @@
+class Solution:
+    def reorderSpaces(self, text: str) -> str:
+        
+        sp = 0
+        
+        s = []
+        tmp = ""
+        for i in range(0,len(text)):
+            if text[i]==" ":
+                sp+=1
+                if tmp!="":
+                    s.append(tmp)
+                    tmp = ""
+            else:
+                tmp+=text[i]
+        
+        if tmp!="":
+            s.append(tmp)
+        div = len(s)-1
+        div = max(1,div)
+        rem = sp%div
+        sp = sp//div
+        
+        f = ""
+        for x in s:
+            f+=x
+            if div>0:
+                f+=" "*sp
+                div-=1
+            
+        f+=" "*rem
+        return f

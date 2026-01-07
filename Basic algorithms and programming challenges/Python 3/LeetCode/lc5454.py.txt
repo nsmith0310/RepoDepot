@@ -1,0 +1,27 @@
+class Solution:
+    def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
+        
+        
+        d = dict()
+        for x in arr:
+            try:
+                d[x]+=1
+            except:
+                d[x]=1
+        
+        
+        l2 = []
+        for x in d:
+            l2.append(d[x])
+            
+        l2.sort()
+        
+        while k>0:
+            if k>=l2[0]:
+                k-=l2[0]
+                del l2[0]
+            else:
+                k = 0
+        return len(l2)
+        
+        

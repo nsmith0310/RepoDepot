@@ -1,0 +1,25 @@
+from random import uniform as u
+from math import cos,sin,pi
+
+class Solution:
+
+    def __init__(self, radius: float, x_center: float, y_center: float):
+        self.h = x_center
+        self.k = y_center
+        self.r = radius
+
+    def randPoint(self) -> List[float]:
+        
+         
+        r1 = self.r*u(0,1)**.5
+        
+        th = 2*pi*u(0,1)
+        return [self.h+r1*sin(th),self.k+r1*cos(th)]
+        
+        
+        ###print(x,y)
+        return [x,y]
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(radius, x_center, y_center)
+# param_1 = obj.randPoint()

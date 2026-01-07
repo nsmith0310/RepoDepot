@@ -1,0 +1,32 @@
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        
+        lim = len(flowerbed)
+        c = 0
+        
+        for i in range(0,lim):
+            if i==0:
+                if lim>1:
+                    if flowerbed[i+1]==0 and flowerbed[i]==0:
+                        c+=1
+                        flowerbed[i]=1
+                else:
+                    if flowerbed[i]==0:
+                        c+=1
+                        flowerbed[i]=1
+            elif i==lim-1:
+                if lim>1:
+                    if flowerbed[i-1]==0 and flowerbed[i]==0:
+                        c+=1
+                        flowerbed[i]=1
+                else:
+                    if flowerbed[i]==0:
+                        c+=1
+                        flowerbed[i]=1
+            else:
+                if lim>2:
+                    if flowerbed[i-1]==0 and flowerbed[i]==0 and flowerbed[i+1]==0:
+                        c+=1
+                        flowerbed[i]=1
+        return c>=n
+        

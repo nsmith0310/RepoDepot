@@ -1,0 +1,11 @@
+class Solution:
+    def numTilings(self, N: int) -> int:
+        nums = [1,2,5]
+        
+        if N<=3:
+            return nums[N-1]
+        
+        for i in range(4,N+1):
+            nums.append(2*nums[-1]+nums[-3])
+            
+        return nums[-1]%(10**9 + 7)

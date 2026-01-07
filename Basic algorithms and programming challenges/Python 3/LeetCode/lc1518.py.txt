@@ -1,0 +1,15 @@
+from math import floor
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        
+        
+        t = 0
+        empty = 0
+        
+        while 1!=-1:
+            t+=numBottles
+            empty+=numBottles
+            numBottles=floor(empty/numExchange)
+            empty%=numExchange
+            if numBottles==0:return t
+            

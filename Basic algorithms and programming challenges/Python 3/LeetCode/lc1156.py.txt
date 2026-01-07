@@ -1,0 +1,66 @@
+class Solution:
+    def maxRepOpt1(self, text: str) -> int:
+        
+        text = list(text)
+        
+        d = dict()
+        
+        lim = len(text)
+        
+        for i in range(0,lim):
+            try:
+                d[text[i]]+=1
+            except:
+                d[text[i]]=1
+                
+        t = 0
+        lst = 0
+        p = 0
+        c = 1
+        d[text[0]]-=1
+        mx = 1
+        i = 1
+        
+        st = text[0]
+        
+        while i<lim:
+            ###print(i,text,d,c,lst)
+            if text[i]!=text[i-1]:
+                if p==0:
+                    if d[text[i-1]]>1:
+                        d[text[i-1]]-=1
+                        st = text[i] 
+                        text[i]=text[i-1]
+                        c+=1
+                        if c>mx:
+                            mx = c
+                        p = 1
+                        lst = i
+                        
+                        i+=1
+                    else:
+                        if c>mx:mx = c
+                        
+                        c=1
+                        lst = i
+                        i+=1
+                else:
+                    d[text[i-1]]+=i-lst+1
+                    i = lst
+                    
+                    text[lst]=st
+                    if c>mx:
+                        mx = c
+                    c = 1
+                    p = 0
+                    i+=1
+                   
+            else:
+                if d[text[i-1]]>=1:
+                    d[text[i-1]]-=1
+                    c+=1
+                if c>mx:mx = c
+                i+=1
+        return mx
+                    
+                        

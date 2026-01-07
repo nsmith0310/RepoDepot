@@ -1,0 +1,53 @@
+from functools import lru_cache
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+        
+        self.lim1 = len(matrix)
+        if self.lim1==0:return 0
+        self.lim2 = len(matrix[0])
+        if self.lim2==0:return 0
+        
+        
+        arr = [[-1 for i in range(0,self.lim2)] for j in range(0,self.lim1)]
+        arr2 = [[-1 for i in range(0,self.lim2)] for j in range(0,self.lim1)]
+        
+        
+        
+        @lru_cache(None)
+        def r(n,c):
+            
+            if c>=arr2[n[0]][n[1]]:
+                tmp = c
+                if n[0]>0:
+                    if matrix[n[0]-1][n[1]]>matrix[n[0]][n[1]]:
+
+                        val = r((n[0]-1,n[1]),c+1)
+                        if val>tmp:tmp = val
+                if n[1]>0:
+                    if matrix[n[0]][n[1]-1]>matrix[n[0]][n[1]]:
+                        val = r((n[0],n[1]-1),c+1)
+                        if val>tmp:tmp = val
+                if n[0]<self.lim1-1:
+                    if matrix[n[0]+1][n[1]]>matrix[n[0]][n[1]]:
+                        val = r((n[0]+1,n[1]),c+1)
+                        if val>tmp:tmp = val
+                if n[1]<self.lim2-1:
+                    if matrix[n[0]][n[1]+1]>matrix[n[0]][n[1]]:
+                        val = r((n[0],n[1]+1),c+1)
+                        if val>tmp:tmp = val
+
+                arr2[n[0]][n[1]]=c
+                arr[n[0]][n[1]] = tmp
+                return tmp
+            else:
+                return arr[n[0]][n[1]]
+        
+        top = 1
+        
+        for i in range(0,self.lim1):
+            for j in range(0,self.lim2):
+                v = r((i,j),1)
+                
+                if v>top:
+                    top = v
+        return top

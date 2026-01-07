@@ -1,0 +1,76 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def addOneRow(self, root: TreeNode, v: int, d: int) -> TreeNode:
+        if root==None:return root
+        
+        
+        tmp = [[root,1,0,-1]]
+        
+        count=0
+        for x in tmp:
+            count+=1
+            if x[0].right!=None:
+                tmp.append([x[0].right,x[1]+1,1,count])
+                
+            if x[0].left!=None:
+                tmp.append([x[0].left,x[1]+1,0,count])
+               
+        
+        tmp.sort(key = lambda x: x[1])
+        
+        l = [[] for j in range(0,tmp[-1][1])]
+        
+        i = 0
+        while i<len(tmp):
+            
+            l[tmp[i][1]-1].append([tmp[i][0],tmp[i][2],tmp[i][3]])
+            i+=1
+        
+        ###print(l)
+        f = [[] for x in l]
+        i = 0
+        while i<len(l):
+            tmp = l[i]
+            left = []
+            
+            
+            for x in tmp:
+                
+                left.append([x[0],x[2]])
+                
+            
+            left.sort(key=lambda x: x[1])
+            
+            left = left[::-1]
+            
+            
+            for y in left:
+                f[i].append(y[0])
+            
+            i+=1
+        if d==1:
+            val = TreeNode(v)
+            val.left = f[0][0]
+            return val
+        elif d==len(f)+1:
+            
+            for x in f[-1]:
+                x.left = TreeNode(v)
+                x.right = TreeNode(v)
+        else:
+            top = d - 2
+            for x in f[top]:
+                tmpl = TreeNode(v)
+                tmpl.left=x.left
+                x.left = tmpl
+                tmpr = TreeNode(v)
+                tmpr.right=x.right
+                x.right = tmpr
+                
+            
+        return f[0][0]

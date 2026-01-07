@@ -1,0 +1,61 @@
+from copy import copy
+class Solution:
+    
+    def c(self,s):
+        if s=='Q':return 0
+        elif s=='W':return 1
+        elif s=='E':return 2
+        else: return 3
+        
+    def balancedString(self, s: str) -> int:
+        
+        lim = len(s)
+        
+        arr = [[0,0,0,0]]
+        
+        arr[0][self.c(s[0])]+=1
+        
+        for i in range(1,lim):
+            tmp = copy(arr[-1])
+            tmp[self.c(s[i])]+=1
+            arr.append(tmp)
+        if arr[-1][0]==arr[-1][1]==arr[-1][2]==arr[-1][3]:return 0
+        mn = lim
+        
+        l = 1
+        h = lim-1
+        while l<=h:
+            m = (l+h)//2
+            
+            t = 0
+            for i in range(0,lim-m+1):
+                tmp = [arr[i+m-1][0]-arr[i][0],arr[i+m-1][1]-arr[i][1],arr[i+m-1][2]-arr[i][2],arr[i+m-1][3]-arr[i][3]]
+                
+                tmp[self.c(s[i])]+=1
+                d = sum(tmp)
+                tmp2 = [arr[-1][0]-tmp[0],arr[-1][1]-tmp[1],arr[-1][2]-tmp[2],arr[-1][3]-tmp[3]]
+                ###print(tmp,tmp2,s[i:i+m],d)
+                    
+                tmp2.sort(reverse=True)
+                num1 = tmp2[0]-tmp2[1]
+                d-=num1
+                tmp2[1]+=num1
+                num2 = tmp2[1]-tmp2[2]
+                d-=num2
+                tmp2[2]+=num2
+                num3 = tmp2[2]-tmp2[3]
+                d-=num3
+                tmp2[3]+=num3
+                ###print(tmp,tmp2,s[i:i+m],d,num1,num2,num3)
+                if (d%4==0 and d>0) or d==0:
+                
+                    
+                    t = 1
+                    break
+            if t==1:
+                if m<mn:mn = m
+                h = m-1
+            else:
+                l = m+1
+        return mn
+                

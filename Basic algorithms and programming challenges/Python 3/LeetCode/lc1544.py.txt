@@ -1,0 +1,21 @@
+class Solution:
+    def makeGood(self, s: str) -> str:
+        
+        lim = len(s)
+        if lim==1:return s
+        s = list(s)
+        i = 0
+        while i<lim-1:
+            
+            o1 = ord(s[i])
+            o2 = ord(s[i+1])
+            
+            if ((o1>=97 and o1<=122 and o2>=65 and o2<=90) or (o2>=97 and o2<=122 and o1>=65 and o1<=90)) and (s[i].lower()==s[i+1].lower()):
+                
+                del s[i]
+                del s[i]
+                lim-=2
+                i = max(0,i-3)
+            else:
+                i+=1
+        return ''.join(s)

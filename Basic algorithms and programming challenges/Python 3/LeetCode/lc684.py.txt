@@ -1,0 +1,49 @@
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        
+        lim = len(edges)
+        
+        arr = [[0 for i in range(0,lim)] for j in range(0,lim)]
+        d = dict()
+        
+        c = 0
+        for x in edges:
+            arr[x[0]-1][x[1]-1]=1
+            arr[x[1]-1][x[0]-1]=1
+            c+=1
+            try:
+                d[x[0]]+=[x[1]]
+            except:
+                d[x[0]]=[x[1]]
+            try:
+                d[x[1]]+=[x[0]]
+            except:
+                d[x[1]]=[x[0]]
+              
+        def r(node,c):
+            if tmparr[node-1]==0:
+                tmparr[node-1]=1
+                for x in d[node]:
+                    if arr[node-1][x-1]==1:
+                        
+                        c+= r(x,1)
+                    
+                return c
+            else:
+                return 0
+            
+         
+        for j in range(lim-1,-1,-1):
+            tmparr =[0 for i in range(0,lim)]
+            arr[edges[j][0]-1][edges[j][1]-1]=0
+            arr[edges[j][1]-1][edges[j][0]-1]=0
+            if j==lim:
+                val = r(edges[j-1][0],1)
+            else:
+                val = r(edges[-1][0],1)
+                
+            arr[edges[j][0]-1][edges[j][1]-1]=1
+            arr[edges[j][1]-1][edges[j][0]-1]=1
+            if val==c:return edges[j]
+               
+                

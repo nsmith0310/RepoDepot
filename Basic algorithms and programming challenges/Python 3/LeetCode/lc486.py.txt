@@ -1,0 +1,31 @@
+from functools import lru_cache
+class Solution:
+    def PredictTheWinner(self, nums: List[int]) -> bool:
+        
+        
+        lim = len(nums)
+        @lru_cache(None)
+        def r(p,s,e):
+            if p==0:
+                tmp = []
+                if e-s>=0:
+                
+                    tmp.append(nums[s]+r(1,s+1,e))
+                    tmp.append(nums[e]+r(1,s,e-1))
+                        
+                else:
+                    return 0
+                     
+                return max(tmp)
+            else:
+                tmp = []
+                if e-s>=0:
+                
+                    tmp.append(-nums[s]+r(0,s+1,e))
+                    tmp.append(-nums[e]+r(0,s,e-1))
+                else:
+                    return 0
+                        
+                return min(tmp)
+        
+        return r(0,0,lim-1)>=0

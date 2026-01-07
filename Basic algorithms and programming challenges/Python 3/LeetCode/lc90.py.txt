@@ -1,0 +1,25 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        
+        lim = len(nums)
+        f = []
+        def r(l,j,lim):
+            ###print(l)
+            
+            f.append(l)
+            for i in range(j+1,lim):
+                r(l+[i],i,lim)
+                
+                
+                
+                
+        r([],-1,lim)
+        
+        ret = []
+        
+        for i in range(0,len(f)):
+            tmp = sorted([nums[j] for j in f[i]])
+            if tmp not in ret:
+                ret.append(tmp)
+                
+        return ret

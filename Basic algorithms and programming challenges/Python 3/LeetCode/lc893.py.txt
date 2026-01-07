@@ -1,0 +1,27 @@
+class Solution:
+    def numSpecialEquivGroups(self, A: List[str]) -> int:
+        
+        d = dict()
+        
+        for x in A:
+            tmp = list(x)
+            tmp.sort()
+            tmp = ''.join(tmp)
+            
+            try:
+                d[tmp].append(x)
+            except:
+                d[tmp] = [x]
+        c=0       
+        for x in d:
+            
+            tmp = set()
+            for y in d[x]:
+                s1 = [y[i] for i in range(0,len(y),2)]
+                s2 = [y[i] for i in range(1,len(y),2)]
+                s1.sort()
+                s2.sort()
+                tmp.add(''.join(s1)+''.join(s2))
+            ###print(x,tmp)
+            c+=len(list(set(tmp)))
+        return c

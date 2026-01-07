@@ -1,0 +1,22 @@
+from functools import lru_cache
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        
+        coins.sort(reverse=True)
+        lim = len(coins)
+        self.mn = 99999999
+        @lru_cache(None)
+        def r(i,s):
+            if s==amount:
+                return 0
+            elif s<amount:
+                tmp = [self.mn]
+                for j in range(i,lim):
+                    tmp.append(1+r(j,s+coins[j]))
+                return min(tmp)
+            else:
+                return self.mn
+            
+        val =r(0,0)
+        if val==99999999:return -1
+        return val

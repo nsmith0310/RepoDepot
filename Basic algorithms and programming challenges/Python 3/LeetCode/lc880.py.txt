@@ -1,0 +1,18 @@
+class Solution:
+    def decodeAtIndex(self, S: str, K: int) -> str:
+        
+        lim = len(S)
+        
+        lth = 0
+        
+        for i in range(0,lim):
+            if ord(S[i])>96:lth+=1  
+            else: lth*=int(S[i])
+            if lth>=K:
+                for j in range(i,-1,-1):
+                    K%=lth
+                    if K==0 and ord(S[j])>96:return S[j]
+                    if ord(S[j])>96:lth-=1
+                    else:lth/=int(S[j])
+                        
+        

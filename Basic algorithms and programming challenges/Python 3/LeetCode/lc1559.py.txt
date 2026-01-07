@@ -1,0 +1,54 @@
+class Solution:
+    def containsCycle(self, grid: List[List[str]]) -> bool:
+        
+        
+        lim1 = len(grid)
+        lim2 = len(grid[0])
+        arr = [[-1 for i in range(0,lim2)] for j in range(0,lim1)]
+        self.cycle = 0
+        def r(v,p,val):
+            if arr[v[0]][v[1]]==-1:
+                arr[v[0]][v[1]]=1
+                
+                
+                if v[0]>0:
+                    if p==-1:
+                        
+                        if grid[v[0]-1][v[1]]==val: 
+                            r([v[0]-1,v[1]],v,val)
+                    else:
+                        if grid[v[0]-1][v[1]]==val and [v[0]-1,v[1]]!=p: 
+                            r([v[0]-1,v[1]],v,val)
+                            
+                if v[1]>0:
+                    if p==-1:
+                        if grid[v[0]][v[1]-1]==val: 
+                            r([v[0],v[1]-1],v,val)
+                    else:
+                        if grid[v[0]][v[1]-1]==val and [v[0],v[1]-1]!=p: 
+                            r([v[0],v[1]-1],v,val)
+                            
+                if v[0]<lim1-1:
+                    if p==-1:
+                        if grid[v[0]+1][v[1]]==val: 
+                            r([v[0]+1,v[1]],v,val)
+                    else:
+                        if grid[v[0]+1][v[1]]==val and [v[0]+1,v[1]]!=p: 
+                            r([v[0]+1,v[1]],v,val)
+                            
+                if v[1]<lim2-1:
+                    if p==-1:
+                        if grid[v[0]][v[1]+1]==val: 
+                            r([v[0],v[1]+1],v,val)
+                    else:
+                        if grid[v[0]][v[1]+1]==val and [v[0],v[1]+1]!=p: 
+                            r([v[0],v[1]+1],v,val)
+            else:
+                self.cycle = 1
+                
+        for i in range(0,lim1):
+            for j in range(0,lim2):
+                if arr[i][j]==-1:
+                    r([i,j],-1,grid[i][j])
+                    if self.cycle ==1:return True
+        return False

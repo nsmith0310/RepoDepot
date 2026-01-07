@@ -1,0 +1,31 @@
+class Solution:
+    def buddyStrings(self, A: str, B: str) -> bool:
+        
+        lim1 = len(A)
+        lim2 = len(B)
+        c = 0
+        
+        l1 = list(A)
+        l2 = list(B)
+        
+        if lim1!=lim2:return False
+        
+        if A==B:
+            k = list(set(l1))
+            return lim1-len(k)>0
+        
+        for i in range(0,lim1):
+            t = 0
+            if l1[i]!=l2[i]:
+                tmp2 = l1[i]
+                for j in range(0,lim1):
+                    if j!=i:
+                        if l1[j]==l2[i]:
+                            l1[i]=l1[j]
+                            l1[j]=tmp2
+                            t = 1
+                            break
+                if t==1:
+                    break
+        return l1==l2
+        

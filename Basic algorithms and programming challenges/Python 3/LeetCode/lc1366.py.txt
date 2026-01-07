@@ -1,0 +1,42 @@
+class Solution:
+    def rankTeams(self, votes: List[str]) -> str:
+        
+        lim = len(votes[0])
+        
+        d = dict()
+        
+        for i in range(0,lim):
+            d[votes[0][i]] = [0 for j in range(0,lim)]
+            
+        for i in range(0,len(votes)):
+            for j in range(0,lim):
+                
+                d[votes[i][j]][j]+=1
+        
+        arr = []
+        for x in d:
+            val = ""
+            for j in range(0,lim):
+                val+=chr(j+97)*d[x][j]
+            
+        
+            arr.append([x,val])
+            
+        arr.sort(key=lambda x: x[1])
+        
+        s=""
+        tmp = [arr[0]]
+       
+        for i in range(1,lim):
+            if arr[i][1]!=arr[i-1][1]:
+                tmp.sort(key=lambda x: x[0])
+                for x in tmp:
+                    s+=x[0]
+                tmp = [arr[i]]
+            else:
+                tmp.append(arr[i])
+        tmp.sort(key=lambda x: x[0])
+        for x in tmp:
+            s+=x[0]
+        return s
+                

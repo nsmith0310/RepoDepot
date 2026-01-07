@@ -1,0 +1,76 @@
+class Solution:
+    def dist(self,p1,p2):
+        return abs(p1[0]-p2[0])+abs(p1[1]-p2[1])
+    def shortestBridge(self, A: List[List[int]]) -> int:
+        lim = len(A)
+        
+        arr = [[-1 for i in range(0,lim)] for j in range(0,lim)]
+        
+        self.l = []
+        def comp(n):
+            if arr[n[0]][n[1]]==-1:
+                self.l+=[[n[0],n[1]]]
+                arr[n[0]][n[1]]=1
+                if n[0]>0 and A[n[0]-1][n[1]]==1 and arr[n[0]-1][n[1]]==-1:
+                    comp([n[0]-1,n[1]])
+                if n[1]>0 and A[n[0]][n[1]-1]==1 and arr[n[0]][n[1]-1]==-1:
+                    comp([n[0],n[1]-1])
+                if n[0]<lim-1 and A[n[0]+1][n[1]]==1 and arr[n[0]+1][n[1]]==-1:
+                    comp([n[0]+1,n[1]])
+                if n[1]<lim-1 and A[n[0]][n[1]+1]==1 and arr[n[0]][n[1]+1]==-1:
+                    comp([n[0],n[1]+1])
+                    
+                    
+        ls = []
+        
+        for i in range(0,lim):
+            for j in range(0,lim):
+                if A[i][j]==1 and arr[i][j]==-1:
+                    comp([i,j])
+                    if self.l!=[]:
+                        ls.append([x for x in self.l])
+                        
+                    
+                        self.l=[]
+        arr1 = [[-1 for i in range(0,lim)] for j in range(0,lim)]   
+        arr2 = [[-1 for i in range(0,lim)] for j in range(0,lim)]
+        arr3 = [[-1 for i in range(0,lim)] for j in range(0,lim)]
+        mn = 99999999
+        
+        vals = []
+        for x in ls[0]:
+            arr1[x[0]][x[1]]=1
+            vals.append(x+[0])
+            
+        for x in ls[1]:
+            arr2[x[0]][x[1]]=1
+        
+        while 1!=-1:
+            tmp = []
+            ###print(vals)
+            for n in vals:
+                if arr2[n[0]][n[1]]==1:
+                    if n[2]-1<mn:mn = n[2]-1
+                        
+                if n[0]>0 and arr1[n[0]-1][n[1]]==-1:
+                    arr1[n[0]-1][n[1]]=1
+                    tmp.append([n[0]-1,n[1],n[2]+1])
+                    
+                if n[1]>0 and arr1[n[0]][n[1]-1]==-1:
+                    arr1[n[0]][n[1]-1]=1
+                    tmp.append([n[0],n[1]-1,n[2]+1])
+                    
+                if n[0]<lim-1 and arr1[n[0]+1][n[1]]==-1:
+                    arr1[n[0]+1][n[1]]=1
+                    tmp.append([n[0]+1,n[1],n[2]+1])
+                    
+                if n[1]<lim-1 and arr1[n[0]][n[1]+1]==-1:
+                    arr1[n[0]][n[1]-1]=1
+                    tmp.append([n[0],n[1]+1,n[2]+1])
+                
+            if tmp == []:
+                return mn
+            vals = tmp
+                        
+                        
+        

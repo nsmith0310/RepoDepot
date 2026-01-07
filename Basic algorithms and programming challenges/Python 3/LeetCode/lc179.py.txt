@@ -1,0 +1,31 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        
+        nums=list(map(str,nums))
+        nums.sort()
+        arr = []
+        
+        
+        
+        while 1!=-1:
+            ind = 0
+            num = nums[0]
+            i = 0
+            while i<len(nums):
+                j = 0
+                while j<len(nums):
+                    if j!=i:
+                        if nums[j]+nums[i]>nums[i]+nums[j]:
+                            ind = j
+                            num = nums[j]
+                    j+=1
+                i+=1
+            del nums[ind]
+            arr.append(num)
+                            
+            if nums==[]:
+                break
+        
+        v= ''.join(arr)
+        if v[0]=='0':return '0'
+        return v

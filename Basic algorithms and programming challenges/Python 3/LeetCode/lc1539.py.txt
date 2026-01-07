@@ -1,0 +1,5 @@
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        
+        return sorted(list(set([i for i in range(1,2001)])-set(arr)))[k-1]
+                

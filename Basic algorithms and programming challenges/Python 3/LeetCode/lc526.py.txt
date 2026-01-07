@@ -1,0 +1,20 @@
+from copy import copy
+class Solution:
+    def countArrangement(self, N: int) -> int:
+        
+        c = 0
+        n = 1
+        tmp = [[0]*N]
+        while n<=N:
+            tmp2 = []
+            for x in tmp:
+                for i in range(0,N):
+                    if x[i]==0 and ((i+1)%n==0 or n%(i+1)==0):
+                        tmp3 = copy(x)
+                        tmp3[i]=i+1
+                        tmp2.append(tmp3)
+            tmp = tmp2
+            n+=1
+        return len(tmp)
+                        
+                        

@@ -1,0 +1,49 @@
+class Solution:
+    def minNumberOfFrogs(self, croakOfFrogs: str) -> int:
+        
+        mx = 0
+        
+        l = [0,0,0,0,0]
+        l2 = [[],[],[],[],[]]
+        
+        c = 0
+        
+        for i in range(0,len(croakOfFrogs)):
+            if croakOfFrogs[i]=='c':
+                l[0]+=1
+                l2[0].append(i)
+                c+=1
+                if c>mx:
+                    mx = c
+            elif croakOfFrogs[i]=='k':
+                
+                l[4]+=1
+                l2[4].append(i)
+                c-=1
+            elif croakOfFrogs[i]=='r':
+                l[1]+=1
+                l2[1].append(i)
+            elif croakOfFrogs[i]=='o':
+                l[2]+=1
+                l2[2].append(i)
+            elif croakOfFrogs[i]=='a':
+                l[3]+=1
+                l2[3].append(i)
+                
+        if len(list(set(l)))!=1:return -1
+        
+        while l2[0]!=[]:
+            tmp = [l2[0][0],l2[1][0],l2[2][0],l2[3][0],l2[4][0]]
+            del l2[0][0]
+            del l2[1][0]
+            del l2[2][0]
+            del l2[3][0]
+            del l2[4][0]
+            
+            tmp2 = [x for x in tmp]
+            tmp2.sort()
+            if tmp2!=tmp:return -1
+        
+        return mx
+                
+        

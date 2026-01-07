@@ -1,0 +1,86 @@
+class Node:
+    def __init__(self):
+        self.children: Dict[str,Node] = {}
+        self.value: Optional[Any] = None
+                    
+class Solution:
+    def insert(self,node: Node, key: str, value: Any) -> None:
+    
+        for char in key:
+            if char not in node.children:
+                node.children[char] = Node()
+            node = node.children[char]
+        node.value = value
+        
+    def keys_with_prefix(self,root: Node, prefix: str) -> List[str]:
+        results: List[str] = []
+        x = self._get_node(root, prefix)
+        self._collect(x, list(prefix), results)
+        return results
+
+    def _collect(self,x: Optional[Node], prefix: List[str], results: List[str]) -> None:
+        """
+        Append keys under node `x` matching the given prefix to `results`.
+        prefix: list of characters
+        """
+        if x is None:
+            return
+        if x.value is not None:
+            prefix_str = ''.join(prefix)
+            results.append(prefix_str)
+        for c in x.children:
+            prefix.append(c)
+            self._collect(x.children[c], prefix, results)
+            del prefix[-1]  # delete last character
+
+    def _get_node(self,node: Node, key: str) -> Optional[Node]:
+        """
+        Find node by key. This is the same as the `find` function defined above,
+        but returning the found node itself rather than the found node's value.
+        """
+        for char in key:
+            if char in node.children:
+                node = node.children[char]
+            else:
+                return None
+        return node
+        
+    def findMaximumXOR(self, nums: List[int]) -> int:
+        lth = len(str(bin(max(nums)))[2:])
+        vals = []
+        
+        
+        trie = Node()
+        
+        mx = 0
+    
+        for x in nums:
+            st = str(bin(x))[2:]
+            tmp = len(st)
+            
+            st = ('0'*(lth-tmp))+st
+            self.insert(trie,st,x)
+            
+            s = ""
+            last = ['0']
+            for i in range(0,lth):
+                if st[i]=='1':
+                    s+='0'
+                    
+                else:
+                    s+='1'  
+            
+            c = lth
+            while c>0:
+                
+                tmp = self.keys_with_prefix(trie,s[:c])
+                if tmp!=[]:
+                    if x^int(tmp[0],2)>mx:
+                        mx = x^int(tmp[0],2)
+                    break
+                else:
+                    c-=1
+        if mx==0:return nums[0]^nums[-1]
+        return mx
+            
+        

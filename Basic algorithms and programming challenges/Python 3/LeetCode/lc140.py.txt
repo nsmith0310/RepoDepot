@@ -1,0 +1,81 @@
+class Solution:
+   
+    
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        f = set()
+        tmp = [x for x in wordDict]
+        
+        d = dict()
+        
+        t = set(tmp)
+        
+        for x in tmp:
+            if x==s:
+                f.add(x)
+            
+                
+            for y in wordDict:
+                if x+y==s:
+                    f.add(x + " " + y)
+                t3 = x.split(" ")
+                t3 = ''.join(t3)
+                if t3+y==s:
+                    try:
+                        for z in d[t3]:
+                            f.add(z + " " + y)
+                    except:
+                        pass
+                      
+                else:
+                    s2 = ''.join(t3)+y
+                    s3 = x + " " + y
+                    
+                    lim = len(s2)
+                    if s[:lim]==s2:
+                        if s2 not in t:
+                            
+                            tmp.append(s3)
+                            t.add(s2)
+                            try:
+                                d[s2].append(s3)
+                            except:
+                                d[s2]=[s3]
+        
+        if list(f)==[]:return []
+        
+        d = dict()
+        
+        t = set(tmp)
+        
+        for x in tmp:
+            if x==s:
+                f.add(x)
+            
+                
+            for y in wordDict:
+                if x+y==s:
+                    f.add(x + " " + y)
+                t3 = x.split(" ")
+                t3 = ''.join(t3)
+                if t3+y==s:
+                    try:
+                        for z in d[t3]:
+                            f.add(z + " " + y)
+                    except:
+                        pass
+                      
+                else:
+                    s2 = ''.join(t3)+y
+                    s3 = x + " " + y
+                    
+                    lim = len(s2)
+                    if s[:lim]==s2:
+                        if s3 not in t:
+                            
+                            tmp.append(s3)
+                            t.add(s3)
+                            try:
+                                d[s2].append(s3)
+                            except:
+                                d[s2]=[s3]
+        return list(f)

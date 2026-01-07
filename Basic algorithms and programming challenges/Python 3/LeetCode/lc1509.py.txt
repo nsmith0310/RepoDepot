@@ -1,0 +1,59 @@
+class Solution:
+    def minDifference(self, nums: List[int]) -> int:
+        
+        lim = len(nums)
+        if lim<=3:return 0
+        
+            
+        nums.sort()
+        
+        l = []
+        
+        tmp1 = nums[0]
+        tmp2 = nums[1]
+        tmp3 = nums[2]
+        
+        del nums[0]
+        del nums[0]
+        del nums[0]
+        
+        l.append(abs(nums[0]-nums[-1]))
+        nums.insert(0,tmp3)
+        nums.insert(0,tmp2)
+        nums.insert(0,tmp1)
+        
+        tmp1 = nums[-1]
+        tmp2 = nums[-2]
+        tmp3 = nums[-3]
+        
+        del nums[-1]
+        del nums[-1]
+        del nums[-1]
+        
+        l.append(abs(nums[0]-nums[-1]))
+        nums.append(tmp3)
+        nums.append(tmp2)
+        nums.append(tmp1)
+        
+        tmp1 = nums[0]
+        tmp2 = nums[-1]
+        tmp3 = nums[-2]
+        
+        del nums[0]
+        del nums[-1]
+        del nums[-1]
+        l.append(abs(nums[0]-nums[-1]))
+        nums.append(tmp3)
+        nums.append(tmp2)
+        nums.insert(0,tmp1)
+        
+        tmp1 = nums[0]
+        tmp2 = nums[1]
+        tmp3 = nums[-1]
+        
+        del nums[0]
+        del nums[0]
+        del nums[-1]
+        l.append(abs(nums[0]-nums[-1]))
+        
+        return min(l)

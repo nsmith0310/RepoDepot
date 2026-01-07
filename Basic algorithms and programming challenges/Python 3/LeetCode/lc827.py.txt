@@ -1,0 +1,67 @@
+class Solution:
+    def largestIsland(self, grid: List[List[int]]) -> int:
+        
+        
+        lim1 = len(grid)
+        lim2 = len(grid[0])
+        d = dict()
+        q = 0
+        zeroes = []
+        for i in range(0,lim1):
+            for j in range(0,lim2):
+                if grid[i][j]==0:
+                    test = []
+                    if i>0:
+                        test.append([i-1,j])
+                    if j>0:
+                        test.append([i,j-1])
+                    if i<lim1-1:
+                        test.append([i+1,j])
+                    if j<lim2-1:
+                        test.append([i,j+1])
+                    for x in test:
+                        if grid[x[0]][x[1]]==1:
+                            zeroes.append([i,j])
+                            q = 1
+                            break
+                else:q=1
+                            
+                            
+                val = (i,j)
+                d[val]=[]
+                if i>0:
+                    d[val].append((i-1,j))
+                if j>0:
+                    d[val].append((i,j-1))
+                if i<lim1-1:
+                    d[val].append((i+1,j))
+                if j<lim2-1:
+                    d[val].append((i,j+1))
+        
+        if zeroes==[]:
+            if q==1:
+                return lim1*lim2
+            return 1
+        def r(x):
+            if arr[x[0]][x[1]]==-1:
+                arr[x[0]][x[1]]=1
+                c = 1
+                for y in d[x]:
+                    if grid[y[0]][y[1]]==1:
+                        c+=r(y)
+                return c
+            else:
+                return 0
+            
+                
+                
+        mx = 1
+        for y in zeroes:
+            arr = [[-1 for i in range(0,lim2)] for j in range(0,lim1)]
+            grid[y[0]][y[1]]=1
+            
+            val = r(tuple(y))
+            if val>mx:mx = val
+            grid[y[0]][y[1]]=0
+        return mx
+                

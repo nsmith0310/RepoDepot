@@ -1,0 +1,62 @@
+
+from copy import copy
+class Solution:
+    def countSubTrees(self, n: int, edges: List[List[int]], labels: str) -> List[int]:
+        
+        d = dict()
+        
+        for x in edges:
+            try:
+                d[x[0]].add(x[1])
+            except:
+                d[x[0]]=set()
+                d[x[0]].add(x[1])
+            try:
+                d[x[1]].add(x[0])
+            except:
+                d[x[1]]=set()
+                d[x[1]].add(x[0])
+                
+        
+        d2 = dict()
+        
+        
+        vals = [0]
+        while 1!=-1:
+            tmp = []
+            for y in vals:
+                for x in d[y]:
+                    d[x].remove(y)
+                    tmp.append(x)
+                d2[y] = list(d[y])
+            if tmp==[]:
+                break
+            else:
+                vals = tmp
+                            
+        ret = [0 for i in range(0,n)]
+        
+        dp = [-1 for i in range(0,n)]
+        
+        def r(node):
+            if dp[node]!=-1: return dp[node]
+            arr = [0 for i in range(0,26)]
+            arr[ord(labels[node])-97]+=1
+            
+            try:
+                for x in d[node]:
+                    
+                        
+                    tmp = r(x)
+                    for i in range(0,26):
+                        arr[i]+=tmp[i]
+            except:
+                pass
+            
+            ret[node]+=arr[ord(labels[node])-97]       
+            dp[node]=arr
+            return arr
+        
+        
+        r(0)
+        return ret    

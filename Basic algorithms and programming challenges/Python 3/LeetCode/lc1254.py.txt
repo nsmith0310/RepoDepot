@@ -1,0 +1,47 @@
+class Solution:
+    def closedIsland(self, grid: List[List[int]]) -> int:
+        
+        lim1 = len(grid)
+        lim2 = len(grid[0])
+        c = 0
+        for i in range(1,lim1-1):
+            for j in range(1,lim2-1):
+                
+                if grid[i][j]==0:
+                    
+                    p = 0
+                    q = [[i,j]]
+                    fin = []
+                    while 1!=-1:
+                        tmp = []
+                        for x in q:
+                            if grid[x[0]][x[1]]==0:
+                                fin.append(x)
+                                grid[x[0]][x[1]]=2
+                                if x[0]==0 or x[0]==lim1-1 or x[1]==0 or x[1]==lim2-1:
+                                    p = 1
+                                    
+                                else:
+                                    if x[0]>0:
+                                        tmp.append([x[0]-1,x[1]])
+                                    if x[1]>0:
+                                        tmp.append([x[0],x[1]-1])
+                                    if x[0]<lim1-1:
+                                        tmp.append([x[0]+1,x[1]])
+                                    if x[1]<lim2-1:
+                                        tmp.append([x[0],x[1]+1])
+                        if tmp==[]:
+                            if p==0:
+                                c+=1
+                            else:
+                                for x in fin:
+                                    grid[x[0]][x[1]]=0
+                            break
+                        else:
+                            q = tmp
+        ###print(grid)
+        return c
+                                
+                            
+        
+        

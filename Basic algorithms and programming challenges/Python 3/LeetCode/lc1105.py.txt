@@ -1,0 +1,40 @@
+class Solution:
+    def minHeightShelves(self, books: List[List[int]], shelf_width: int) -> int:
+        
+        
+        lim = len(books)
+        arr = [0 for i in range(0,lim)]
+        
+        def r(j):
+            if arr[j]!=0:return arr[j]
+            w = books[j][0]
+            h = books[j][1]
+            val = j
+            
+            tmp = []
+            vals = [h]
+            
+            j+=1
+            while j<lim:
+                if w+books[j][0]<=shelf_width:
+                    tmp.append(j)
+                    w+=books[j][0]
+                    vals.append(max(books[j][1],max(vals)))
+                    j+=1
+                else:
+                    tmp.append(j)
+                    break
+            
+            
+            
+            for i in range(0,len(tmp)):
+                vals[i]+=r(tmp[i])
+                
+            arr[val]=min(vals)
+            return arr[val]
+                
+            
+                
+            
+        
+        return (r(0))

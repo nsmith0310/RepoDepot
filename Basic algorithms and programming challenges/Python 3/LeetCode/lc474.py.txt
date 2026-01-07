@@ -1,0 +1,49 @@
+from functools import lru_cache
+class Solution:
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        
+        
+        d = dict()
+        d2 = dict()
+        
+        i = 0
+        while i<len(strs):
+        
+            c1 = 0
+            c2 = 0   
+            
+            for j in range(0,len(strs[i])):
+                if strs[i][j]=='1':
+                    c1+=1
+                else:
+                    c2+=1
+                    
+            d[strs[i]]=[c2,c1]
+            if strs[i] in d2:
+                d2[strs[i]][0]-=c2
+                d2[strs[i]][1]-=c1
+                
+                if d2[strs[i]][0]<0 or d2[strs[i]][1]<0:
+                    del strs[i]
+                    i-=1
+            else:
+                d2[strs[i]]=[m-c2,n-c1]
+            i+=1
+        
+      
+        
+        lim = len(strs)
+        @lru_cache(None)
+        def r(i,M,N):
+            
+            tmp = 0
+            for j in range(i+1,lim):
+                if M-d[strs[j]][0]>=0 and N-d[strs[j]][1]>=0:
+                    
+                    val = 1+r(j,M-d[strs[j]][0],N-d[strs[j]][1])
+                    if val>tmp:tmp = val
+                    
+            return tmp
+        
+        return r(-1,m,n)
+            

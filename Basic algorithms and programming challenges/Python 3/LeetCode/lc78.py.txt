@@ -1,0 +1,9 @@
+from itertools import combinations as c
+
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        
+        l = [[]]
+        for i in range(1,len(nums)+1):
+            l += [list(x) for x in list(c(nums,i))]
+        return l

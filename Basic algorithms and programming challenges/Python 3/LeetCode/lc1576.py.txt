@@ -1,0 +1,45 @@
+class Solution:
+    def f(self,c):
+        if ord(c)==122:
+            return 'a'
+        else:
+            
+            return chr(ord(c)+1)
+        
+    def modifyString(self, s: str) -> str:        
+        l = list(s)       
+        lim = len(s)        
+        i = 0
+        while i<lim:        
+            if l[i]=='?':
+                ed = lim
+                for j in range(i,lim):
+                    if l[j]!='?':
+                        ed = j
+                        break            
+                if i==0:
+                    l[0]='a'
+                    j = 1
+                    while j<ed:
+                        l[j]=self.f(l[j-1])
+                        j+=1
+                    j-=1
+                    if ed!=lim:
+                        if l[j]==l[j+1]:
+                            l[j]=self.f(l[j])
+                else:
+                    j = i
+                    while j<ed:
+                        l[j]=self.f(l[j-1])
+                        j+=1
+                    j-=1
+                    if j<lim-1:
+                        if l[j]==l[j+1]:
+                            l[j]=self.f(l[j])
+                i=ed
+            else:
+                i+=1
+        return ''.join(l)
+            
+                
+                

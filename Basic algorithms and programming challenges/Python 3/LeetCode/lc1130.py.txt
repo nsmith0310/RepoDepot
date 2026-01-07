@@ -1,0 +1,19 @@
+from functools import lru_cache
+class Solution:
+    def mctFromLeafValues(self, arr: List[int]) -> int:
+        
+        lim = len(arr)
+        @lru_cache(None)
+        def r(s,f):
+            
+            tmp = []
+            for i in range(s+1,f):
+                tmp.append(max(arr[s:i])*max(arr[i:f])+r(s,i)+r(i,f))
+            if tmp==[]:return 0
+            return min(tmp)
+                
+                
+                
+        return r(0,lim)
+                
+            

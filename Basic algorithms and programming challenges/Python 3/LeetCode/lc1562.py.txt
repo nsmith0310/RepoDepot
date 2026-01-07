@@ -1,0 +1,51 @@
+class Solution:
+    def findLatestStep(self, arr: List[int], m: int) -> int:
+        
+        lim = len(arr)
+        if lim==m:return lim
+        print(lim)
+        start = [[0,lim]]
+        t = 1
+        count = 1
+        for i in range(lim-1,-1,-1):
+            val = arr[i]-1
+            
+             
+            ###print(start)
+            l = 0
+            h = len(start)-1
+            while l<=h:
+                
+                
+                mid = (l+h)//2
+                
+                if val>=start[mid][0] and val<=start[mid][1]:
+                    
+                    halfa = [start[mid][0],val]
+                    halfb = [val+1,start[mid][1]]
+                    
+                    del start[mid]
+                    count-=1
+                    if halfa[1]-halfa[0]==m:
+                        return i
+                    elif halfa[1]-halfa[0]>m:
+                        t = 1
+                        start.append(halfa)
+                        
+                    if halfb[1]-halfb[0]==m:
+                        return i
+                    elif halfb[1]-halfb[0]>m:
+                        t =1
+                        
+                        start.append(halfb)
+                        
+                    if t==0:return -1
+                    start.sort(key=lambda x: x[0])
+                    break
+                elif val<start[mid][0]:
+                    
+                    h = mid-1
+                else:
+                    l = mid+1
+                    
+        return -1

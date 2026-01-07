@@ -1,0 +1,35 @@
+from copy import copy
+class Solution:
+    def canMakePaliQueries(self, s: str, queries: List[List[int]]) -> List[bool]:
+        
+        lim = len(s)
+        arr = [[0]*26]
+        
+        arr[0][ord(s[0])-97]+=1
+        
+        for i in range(1,lim):
+            tmp = copy(arr[-1])
+            tmp[ord(s[i])-97]+=1
+            arr.append(tmp)
+        
+        f = []
+        
+        for x in queries:
+            tmp = [arr[x[1]][i]-arr[x[0]][i] for i in range(0,26)]
+            tmp[ord(s[x[0]])-97]+=1
+            
+            tmp2 = []
+            c = 0
+            for i in range(0,26):
+                if tmp[i]%2!=0:
+                    c+=1
+            ###print(x,c,tmp)
+            if c<=1:
+                f.append(True)
+            elif x[2]==0:
+                f.append(False)
+            else:
+                c-=2*x[2]
+                f.append(c<=1)
+                
+        return f

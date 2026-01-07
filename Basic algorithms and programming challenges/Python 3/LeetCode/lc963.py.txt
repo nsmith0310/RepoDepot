@@ -1,0 +1,43 @@
+
+from math import acos
+from itertools import permutations as p
+class Solution:
+    def d(self,p1,p2):
+        return ((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)**.5
+
+        
+        
+        
+    def minAreaFreeRect(self, points: List[List[int]]) -> float:
+        
+        lim = len(points)
+        if lim<4:return 0
+        
+        di = set(map(tuple,points))
+        
+        pos = list(p(points,3))
+        mn = 99999999999
+        
+        for p1,p2,p3 in pos:
+            
+            px = p2[0]+p3[0]-p1[0]
+            py = p2[1]+p3[1]-p1[1]
+            if (px,py) in di:
+                d12 = self.d(p1,p2)
+                d13 = self.d(p1,p3)
+                d23 = self.d(p2,p3)
+                
+                try:
+                    if round(acos((d12**2 + d13**2 - d23**2)/(2*d12*d13)),4)==1.5708:
+                        val  = round(d12*d13)
+                        if val <mn:mn = val
+                except:
+                    pass
+            
+            
+
+
+
+        if mn==99999999999:return 0        
+        return mn
+                

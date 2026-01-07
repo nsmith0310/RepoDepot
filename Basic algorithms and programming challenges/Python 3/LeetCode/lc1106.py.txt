@@ -1,0 +1,115 @@
+class Solution:
+    def parseBoolExpr(self, expression: str) -> bool:
+        
+        def find(s,idx):
+         
+            c=0
+            for i in range(0,len(s)):
+                if s[i]=="(":c+=1
+                elif s[i]==")":c-=1
+                if c==0:
+                  
+                    return [s[1:i],i+idx]                 
+                                    
+        def andfunction(s):
+       
+            l = set()
+            i = 0
+            while i<len(s):
+                if s[i]=="|":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(orfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="&":
+                    tmp = find(s[i+1:],i+1)
+                    print(tmp)
+                    l.add(andfunction(tmp[0]))
+                    i = tmp[1]
+                    print(i)
+                elif s[i]=="!":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(notfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="(":
+                    tmp = find(s[i:],i)
+                 
+                    l.add(andfunction(tmp[0]))
+                    i = tmp[1]
+                   
+                elif s[i]=="t" or s[i]=="f":
+                    l.add(s[i])
+                i+=1
+             
+            if l=={'t'}:return 't'
+            return 'f'
+            
+        def orfunction(s):
+            
+            l = set()
+            i = 0
+            while i<len(s):
+                if s[i]=="|":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(orfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="&":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(andfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="!":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(notfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="(":
+                    tmp = find(s[i:],i)
+                    l.add(orfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="t" or s[i]=="f":
+                    l.add(s[i])
+                i+=1
+            if l!={'f'}:return 't'
+            return 'f'
+                    
+        def notfunction(s):
+            if s[0]=="(":
+                tmp = find(s,0)
+                s = tmp[0]
+             
+            l = set()
+            i = 0
+            while i<len(s):
+                if s[i]=="|":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(orfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="&":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(andfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="!":
+                    tmp = find(s[i+1:],i+1)
+                    l.add(notfunction(tmp[0]))
+                    i = tmp[1]
+                elif s[i]=="t" or s[i]=="f":
+                    l.add(s[i])
+                
+                i+=1  
+            
+            if l=={'t'}:return 'f'
+            
+            return 't'
+            
+        def mainfunction(s):
+            for i in range(0,len(s)):
+                if s[i]=="|":
+                    return orfunction(s[i+1:])
+                elif s[i]=="&":       
+                    return andfunction(s[i+1:])
+                elif s[i]=="!":
+                    return notfunction(s[i+1:])
+                if s[i]=='t':return 't'
+                elif s[i]=='f':return 'f'
+        x = mainfunction(expression)
+        if x=='f':return False
+        return True
+                    

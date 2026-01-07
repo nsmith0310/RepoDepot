@@ -1,0 +1,35 @@
+from heapq import *
+class Solution:
+    def isPossible(self, nums: List[int]) -> bool:
+        
+        d = dict()
+        
+        heapify(nums)
+        val = heappop(nums)
+        
+        d[val] = [1]
+        
+        while nums!=[]:
+            val = heappop(nums)
+            if val-1 in d:
+                d[val-1][0]+=1
+                tmp = d[val-1][0]
+                del d[val-1][0]
+                if d[val-1]==[]:
+                    del d[val-1]
+                if val in d:
+                    d[val].append(tmp)
+                    d[val].sort()
+                else:
+                    d[val]=[tmp]
+            else:
+                if val in d:
+                    d[val].append(1)
+                    d[val].sort()
+                else:
+                    d[val]=[1]
+                
+        for x in d:
+            for y in d[x]:
+                if y<3:return False
+        return True

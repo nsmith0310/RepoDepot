@@ -1,0 +1,64 @@
+class Solution:
+    def nxt(self,c):
+        if ord(c)==122:
+            return 'a'
+        else:
+            return chr(ord(c)+1)
+        
+    def findSubstringInWraproundString(self, p: str) -> int:
+        lim = len(p)
+        p+="@"
+        s = set()
+        
+        
+        i = 0
+        while i<lim:
+            j = i
+            while j<lim:
+                if self.nxt(p[j])!=p[j+1]:
+                    break
+                j+=1
+            s.add(p[i:j+1])
+            i=j+1
+        
+        s2 = set()
+        s = sorted(list(s),key = lambda x: len(x),reverse=True)
+        t = 0
+        for x in s:
+            q = 0
+            for y in s2:
+                if x in y:
+                    q = 1
+                    break
+            if q==0:
+                s2.add(x)
+        s2 = sorted(list(s2),key = lambda x: len(x),reverse=True)
+        s4 = set()
+        s3 = set()
+        
+        if len(s2)==1:
+        
+            for x in s2:
+                l = len(x)-1
+
+                while l>=0:
+
+
+                    if x[l] not in s3:
+                        s3.add(x[l])
+                        t+=l+1
+
+
+                    l-=1
+            return t
+        else:
+            for x in s2:
+                l = len(x)
+                for i in range(0,l):
+                    for j in range(0,l):
+                        s4.add(x[i:j+1])
+            try:
+                s4.remove("")
+            except:
+                pass
+            return len(list(s4))

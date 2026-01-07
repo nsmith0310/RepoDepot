@@ -1,0 +1,175 @@
+class Solution:
+    def findTheLongestSubstring(self, s: str) -> int:
+        
+        lim = len(s)
+        
+        fe = lim+1
+        le = 0
+        
+        mx = 0
+        
+        ones = [[lim+1,0] for j in range(0,5)]
+        twos = [[lim+1,0] for j in range(0,10)]
+        threes = [[lim+1,0] for j in range(0,9)]
+        fours = [[lim+1,0] for j in range(0,5)]
+        fives = [lim+1,0]
+        
+        
+        
+        tmp = [0,0,0,0,0]
+        
+        for i in range(0,lim):
+            
+            counts = []
+            if s[i]=='a':tmp[0]+=1
+            if s[i]=='e':tmp[1]+=1
+            if s[i]=='i':tmp[2]+=1
+            if s[i]=='o':tmp[3]+=1
+            if s[i]=='u':tmp[4]+=1
+            
+            c = 0
+            for x in tmp:
+                if x%2==0:
+                    counts.append(0)
+                else:
+                    counts.append(1)
+                    c+=1
+            
+            ####print(counts,i)
+            if c==0:
+                if i+1>mx:mx=i+1
+                if i<fe:fe = i
+                if i>le:le = i
+                    
+            else:
+                if c==1:
+                    if counts ==[1,0,0,0,0]:
+                        if ones[0][0]>i:ones[0][0]=i
+                        if ones[0][1]<i:ones[0][1]=i
+                            
+                    elif counts ==[0,1,0,0,0]:
+                        if ones[1][0]>i:ones[1][0]=i
+                        if ones[1][1]<i:ones[1][1]=i
+                            
+                    elif counts ==[0,0,1,0,0]:
+                        if ones[2][0]>i:ones[2][0]=i
+                        if ones[2][1]<i:ones[2][1]=i
+                            
+                    elif counts ==[0,0,0,1,0]:
+                        if ones[3][0]>i:ones[3][0]=i
+                        if ones[3][1]<i:ones[3][1]=i
+                            
+                    elif counts ==[0,0,0,0,1]:
+                        if ones[4][0]>i:ones[4][0]=i
+                        if ones[4][1]<i:ones[4][1]=i
+                            
+                elif c==2:
+                    if counts ==[1,1,0,0,0]:
+                        if twos[0][0]>i:twos[0][0]=i
+                        if twos[0][1]<i:twos[0][1]=i
+                            
+                    elif counts ==[1,0,1,0,0]:
+                        if twos[1][0]>i:twos[1][0]=i
+                        if twos[1][1]<i:twos[1][1]=i
+                            
+                    elif counts ==[1,0,0,1,0]:
+                        if twos[2][0]>i:twos[2][0]=i
+                        if twos[2][1]<i:twos[2][1]=i
+                            
+                    elif counts ==[1,0,0,0,1]:
+                        if twos[3][0]>i:twos[3][0]=i
+                        if twos[3][1]<i:twos[3][1]=i
+                            
+                    elif counts ==[0,1,1,0,0]:
+                        if twos[4][0]>i:twos[4][0]=i
+                        if twos[4][1]<i:twos[4][1]=i
+                            
+                    elif counts ==[0,1,0,1,0]:
+                        if twos[5][0]>i:twos[5][0]=i
+                        if twos[5][1]<i:twos[5][1]=i
+                            
+                    elif counts ==[0,1,0,0,1]:
+                        if twos[6][0]>i:twos[6][0]=i
+                        if twos[6][1]<i:twos[6][1]=i
+                            
+                    elif counts ==[0,0,1,1,0]:
+                        if twos[7][0]>i:twos[7][0]=i
+                        if twos[7][1]<i:twos[7][1]=i
+                            
+                    elif counts ==[0,0,1,0,1]:
+                        if twos[8][0]>i:twos[8][0]=i
+                        if twos[8][1]<i:twos[8][1]=i
+                            
+                    elif counts ==[0,0,0,1,1]:
+                        if twos[9][0]>i:twos[9][0]=i
+                        if twos[9][1]<i:twos[9][1]=i
+                            
+                elif c==3:
+                    if counts ==[1,1,1,0,0]:
+                        if threes[0][0]>i:threes[0][0]=i
+                        if threes[0][1]<i:threes[0][1]=i
+                            
+                    elif counts ==[1,1,0,1,0]:
+                        if threes[1][0]>i:threes[1][0]=i
+                        if threes[1][1]<i:threes[1][1]=i
+                            
+                    elif counts ==[1,1,0,0,1]:
+                        if threes[2][0]>i:threes[2][0]=i
+                        if threes[2][1]<i:threes[2][1]=i
+                            
+                    elif counts ==[0,1,1,1,0]:
+                        if threes[3][0]>i:threes[3][0]=i
+                        if threes[3][1]<i:threes[3][1]=i
+                            
+                    elif counts ==[0,0,1,1,1]:
+                        if threes[4][0]>i:threes[4][0]=i
+                        if threes[4][1]<i:threes[4][1]=i
+                            
+                    elif counts ==[1,0,0,1,1]:
+                        if threes[5][0]>i:threes[5][0]=i
+                        if threes[5][1]<i:threes[5][1]=i
+                            
+                    elif counts ==[0,1,0,1,1]:
+                        if threes[6][0]>i:threes[6][0]=i
+                        if threes[6][1]<i:threes[6][1]=i
+                            
+                    elif counts ==[1,0,1,0,1]:
+                        if threes[7][0]>i:threes[7][0]=i
+                        if threes[7][1]<i:threes[7][1]=i
+                            
+                    elif counts ==[1,0,1,1,0]:
+                        if threes[8][0]>i:threes[8][0]=i
+                        if threes[8][1]<i:threes[8][1]=i
+                elif c==4:
+                    if counts ==[1,1,1,1,0]:
+                        if fours[0][0]>i:fours[0][0]=i
+                        if fours[0][1]<i:fours[0][1]=i
+                    elif counts ==[1,1,1,0,1]:
+                        if fours[1][0]>i:fours[1][0]=i
+                        if fours[1][1]<i:fours[1][1]=i
+                    elif counts ==[1,1,0,1,1]:
+                        if fours[2][0]>i:fours[2][0]=i
+                        if fours[2][1]<i:fours[2][1]=i
+                    elif counts ==[1,0,1,1,1]:
+                        if fours[3][0]>i:fours[3][0]=i
+                        if fours[3][1]<i:fours[3][1]=i
+                    elif counts ==[0,1,1,1,1]:
+                        if fours[4][0]>i:fours[4][0]=i
+                        if fours[4][1]<i:fours[4][1]=i
+                elif c==5:
+                    if fives[0]>i: fives[0]=i
+                    if fives[1]<i: fives[1]=i    
+        
+        for x in ones:
+            if x[1]-x[0]>mx:mx = x[1]-x[0]
+        for x in twos:
+            if x[1]-x[0]>mx:mx = x[1]-x[0]
+        for x in threes:
+            if x[1]-x[0]>mx:mx = x[1]-x[0]
+        for x in fours:
+            if x[1]-x[0]>mx:mx = x[1]-x[0]
+        if fives[1]-fives[0]>mx: mx = fives[1]-fives[0]
+            
+        if le-fe+1>mx:mx=le-fe+1  
+        print(le,fe,lim)
+        return mx

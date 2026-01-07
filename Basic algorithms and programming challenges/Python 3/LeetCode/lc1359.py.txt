@@ -1,0 +1,5 @@
+from math import factorial as f
+class Solution:
+    def countOrders(self, n: int) -> int:
+        
+        return(f(2*n)//2**n)%(10**9 + 7)

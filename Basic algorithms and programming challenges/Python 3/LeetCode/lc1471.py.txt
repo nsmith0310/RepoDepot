@@ -1,0 +1,12 @@
+class Solution:
+    def getStrongest(self, arr: List[int], k: int) -> List[int]:
+        
+        lim = len(arr)
+        arr.sort()
+        
+        m = arr[(lim-1)//2]
+       
+        
+        arr.sort(key = lambda x: abs(x-m))
+        
+        return arr[-k:]

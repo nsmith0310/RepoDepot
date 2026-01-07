@@ -1,0 +1,31 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        d = dict()
+        
+        for i in range(0,len(prerequisites)):
+            try:
+                d[prerequisites[i][0]].append(prerequisites[i][1])
+            except:
+                d[prerequisites[i][0]]=[prerequisites[i][1]]
+                
+        for x in d:
+            q = d[x]
+            s = set()
+            s.add(x)
+            for y in q:
+                try:
+                    for z in d[y]:
+                        if z==x:return False
+                        if z in s:
+                            break
+                        q.append(z)
+                        s.add(z)
+                except:
+                    pass
+                
+            
+            
+        return True
+                
+            

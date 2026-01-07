@@ -1,0 +1,52 @@
+from functools import lru_cache
+class Solution:
+    def shoppingOffers(self, price: List[int], special: List[List[int]], needs: List[int]) -> int:
+        
+        self.lim2 = len(needs)
+        
+        off = []
+        for i in range(0,len(price)):
+            tmp = [0]*self.lim2
+            tmp[i]=1
+            
+            off.append(tmp+[price[i]])
+        for i in range(0,len(special)):
+            off.append(special[i])
+            
+        self.lim = len(off)
+        self.mn = 1000000000
+        
+        off.sort(key = lambda x: x[-1], reverse=True)
+        
+        
+        
+        @lru_cache(None)
+        def r(i,c,p):
+            
+            if p>=self.mn:return self.mn
+            tal = 0
+            for k in range(0,self.lim2):
+                if c[k]>needs[k]:
+                    return self.mn
+                elif c[k]==needs[k]:
+                    tal+=1
+                    
+            if tal==self.lim2:
+                if p<self.mn:self.mn = p
+                return p
+            
+            else:
+                tmp = self.mn
+                for j in range(i,self.lim):
+                    val = list(c)
+                    for k in range(0,self.lim2):
+                        
+                        val[k]+=off[j][k]
+                    val2 = r(j,tuple(val),p+off[j][-1])
+                    if val2<tmp:tmp = val2
+                    
+                return tmp
+        
+        start = tuple([0]*(self.lim2))
+        return r(0,start,0)
+                    

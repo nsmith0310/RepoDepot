@@ -1,0 +1,16 @@
+class Solution:
+    def containsPattern(self, arr: List[int], m: int, k: int) -> bool:
+        
+        lim = len(arr)        
+        for i in range(0,lim-m+1):
+            c = 1
+            j = i+m
+            while j<lim-m+1:
+                if arr[j:j+m]==arr[i:i+m]:
+                    c+=1
+                    j+=m
+                else:
+                    break
+            if c>=k:
+                return True
+        return False

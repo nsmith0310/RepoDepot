@@ -1,0 +1,69 @@
+import heapq
+class Solution:
+    def rearrangeBarcodes(self, barcodes: List[int]) -> List[int]:
+        
+        freq = [0]*max(barcodes)
+        
+        for i in range(0,len(barcodes)):
+            freq[barcodes[i]-1]+=1
+            
+        d = dict()
+        c = 0
+        i = 0
+        while i<len(freq):
+            if freq[i]!=0:
+                try:
+                    d[freq[i]].append((i+1))
+                except:
+                    d[freq[i]]=[(i+1)]
+            
+            i+=1
+        i = 0
+        while i<len(freq):
+            if freq[i]==0:
+                del freq[i]
+                i-=1
+            else:
+                freq[i]*=-1
+            i+=1
+        f = [-1]
+       
+        heapq.heapify(freq)
+        
+        while freq!=[]:
+            sift = []
+            while 1!=-1:
+                
+            
+                val = heapq.heappop(freq)
+                val = -1*val
+                sec = 0
+                for i in range(0,len(d[val])):
+                    if d[val][i]!=f[-1]:
+                        tmp = d[val][i]
+                        dval = i
+                        sec = 1
+                        break
+                if sec == 1:
+                    for x in sift:
+                        heapq.heappush(freq,-x)
+                    del d[val][dval]
+                    if d[val]==[]:
+                        del d[val]
+                    break
+                else:
+                    sift.append(val)
+                       
+            
+            f.append(tmp)
+            
+            if val>1:
+                heapq.heappush(freq,-1*(val-1))
+                try:
+                    d[val-1].append(tmp)
+                except:
+                    d[val-1]=[tmp]
+            ###print(val,d,freq,f)
+        return f[1:]
+                
+                

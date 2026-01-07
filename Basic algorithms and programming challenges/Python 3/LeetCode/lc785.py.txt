@@ -1,0 +1,62 @@
+class Solution:
+    
+    
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        
+        lim = len(graph)
+        
+        vals = [-1]*lim
+        arr = [-1]*lim
+        
+        d = dict()
+        t = 0
+        
+        arr2 = [-1]*lim
+        comps = []
+        
+    
+        for i in range(0,lim):
+            d[i]=graph[i]
+            if graph[i]!=[] and t==0:
+                t = 1
+                start = [[i,0]]
+                vals[i]=0
+                
+        if t==0:return True
+        
+        def c(i):
+            if arr2[i]==-1:
+                arr2[i]=1
+                for x in d[i]:
+                    c(x)
+        
+        for i in range(0,lim):
+            if arr2[i]==-1:
+                comps.append(i)
+                c(i)
+                
+        for z in comps:
+            start = [[z,0]]
+            while 1!=-1:
+                tmp = []
+
+                for x in start:
+                    if arr[x[0]]==-1:
+                        arr[x[0]]=1
+                        for y in d[x[0]]:
+                            if vals[y]==-1:
+                                if x[1]==0:
+                                    vals[y]=1
+                                    tmp.append([y,1])
+                                else:
+                                    vals[y]=0
+                                    tmp.append([y,0])
+
+                            else:
+                                if x[1]==0 and vals[y]==0:return False
+                                if x[1]==1 and vals[y]==1:return False
+                if tmp==[]:
+                    break
+                else:
+                    start = tmp
+        return True

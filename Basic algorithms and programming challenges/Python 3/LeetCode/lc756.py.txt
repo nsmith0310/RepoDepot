@@ -1,0 +1,45 @@
+from itertools import product as p
+class Solution:
+    def pyramidTransition(self, bottom: str, allowed: List[str]) -> bool:
+        
+        self.lim = len(bottom)
+        
+        d = dict()
+        for x in allowed:
+            try:
+                d[x[:2]].append(x[2])
+            except:
+                d[x[:2]]=[x[2]]
+                
+        self.con = 0        
+        def r(s,h):
+            if h == self.lim:
+                self.con = 1
+                
+            if self.con!=1:
+                lth = len(s)
+                pools = []
+
+                try:
+
+                    for i in range(0,lth-1):
+                        pools.append(d[s[i:i+2]])
+
+                    result = [[]]
+                    for pool in pools:
+
+                        result = [x+[y] for x in result for y in pool]
+                        for y in result:
+
+                            if len(y)==lth-1:
+
+                                ###print(''.join(y))
+                                r(''.join(y),h+1)
+
+                except:
+                    pass
+            
+            
+        r(bottom,1)
+        return self.con==1        
+        

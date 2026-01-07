@@ -1,0 +1,19 @@
+from itertools import combinations as c
+
+class Solution:
+    def maximumRequests(self, n: int, requests: List[List[int]]) -> int:
+        
+        t = [0]*n
+        mx = 0
+        for i in range(1,len(requests)+1):
+            tmp = list(c(requests,i))
+            for x in tmp:
+                u = [0]*n
+                for y in x:
+                    u[y[0]]-=1
+                    u[y[1]]+=1
+                if u==t:
+                    mx = i
+                    break
+        return mx
+                

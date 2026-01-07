@@ -1,0 +1,35 @@
+class Solution:
+    def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
+        
+        d = dict()
+        
+        for x in edges:
+            
+           
+            try:
+                d[x[0]]+=[x[1]]
+            except:
+                d[x[0]]=[x[1]]
+            try:
+                d[x[1]]+=[x[0]]
+            except:
+                d[x[1]]=[x[0]]
+            
+                
+        self.s=set()
+        arr = [-1 for i in range(0,n)]
+        
+        def r(n,l):
+            
+            if arr[n]==-1:
+                arr[n]=1
+                if hasApple[n]==True:
+                    self.s|=l
+                
+                for x in d[n]:
+
+                    r(x,l|{str(n)+'.'+str(x)})
+                
+                
+        r(0,set())
+        return 2*len(list(self.s))

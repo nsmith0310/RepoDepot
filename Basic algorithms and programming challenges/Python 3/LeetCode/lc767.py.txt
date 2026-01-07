@@ -1,0 +1,26 @@
+class Solution:
+    def reorganizeString(self, S: str) -> str:
+        
+        count = [[chr(i),0] for i in range(97,123)]
+        
+        lim = len(S)
+        
+        for i in range(0,lim):
+            count[ord(S[i])-97][1]+=1
+        
+        count.sort(key = lambda x: x[1])
+        
+        while count[0][1]==0:
+            del count[0]
+            
+        if count[-1][1]>(lim+1)/2:return ""
+        
+        a = []
+        
+        for x in count:
+            a+=[x[0]]*x[1]
+            
+        f = [None]*lim
+        
+        f[::2],f[1::2] = a[lim//2:],a[:lim//2]
+        return ''.join(f)

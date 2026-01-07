@@ -1,0 +1,26 @@
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        
+        pts = sum(cardPoints)
+        
+        n = len(cardPoints)
+        if n-k<=0:return pts
+        
+        
+        wind = [cardPoints[i] for i in range(0,n-k)]
+       
+        curr = sum(wind)
+        
+        
+        ans = pts-curr
+        
+        
+        for i in range(n-k,n):
+            curr-=wind[0]
+            del wind[0]
+            wind.append(cardPoints[i])
+            curr+=wind[-1]
+            if pts-curr>ans:ans=pts-curr
+                
+        return ans
+            

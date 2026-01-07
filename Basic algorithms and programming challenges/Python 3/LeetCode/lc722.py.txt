@@ -1,0 +1,45 @@
+class Solution:
+    def removeComments(self, source: List[str]) -> List[str]:
+        
+        tmp = []
+        s = 0
+        t=""
+        for i in range(0,len(source)):
+            
+            j = 0
+            while j<len(source[i]):
+            
+                
+                if source[i][j:j+2]=='/*':
+                    
+                    if s==0:
+                        s=1
+                        j+=2
+                    else:
+                        j+=1
+                elif source[i][j:j+2]=='*/':
+                    if s==1:
+                        
+                        s=0
+                        j+=2
+                    else:
+                        t+="*"
+                        j+=1
+                elif source[i][j:j+2]=='//':   
+                    if s==0:
+                        
+                        break
+                    else:
+                        j+=2
+                    
+                else:
+                    if s==0:
+                        t+=source[i][j]
+                    j+=1
+            if t!="" and s==0:
+                tmp.append(t)
+                t=""
+        return tmp
+                        
+                
+                            

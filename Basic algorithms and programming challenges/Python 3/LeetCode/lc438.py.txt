@@ -1,0 +1,16 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        
+        l = sorted(list(p))
+       
+        
+        f = []
+        lim1 = len(l)
+        lim2 = len(s)
+        
+        for i in range(0,lim2-lim1+1):
+            k = sorted(s[i:i+lim1])
+            if k==l:
+                f.append(i)
+                
+        return f

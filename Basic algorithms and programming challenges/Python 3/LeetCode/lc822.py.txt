@@ -1,0 +1,16 @@
+class Solution:
+    def flipgame(self, fronts: List[int], backs: List[int]) -> int:
+        
+        vals = []
+        vals2 = set()
+        for i in range(0,len(fronts)):
+            if fronts[i]!=backs[i]:
+                vals.append(backs[i])
+                vals.append(fronts[i])
+            else:
+                vals2.add(fronts[i])
+        vals.sort()
+        
+        for x in vals: 
+            if x not in vals2:return x
+        return 0

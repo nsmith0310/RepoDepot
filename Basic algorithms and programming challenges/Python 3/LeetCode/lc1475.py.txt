@@ -1,0 +1,19 @@
+class Solution:
+    def finalPrices(self, prices: List[int]) -> List[int]:
+        
+        lim = len(prices)
+        
+        
+        arr2 = [x for x in prices]
+        
+        q = []
+        for i in range(lim-1,-1,-1):
+            while q!=[] and arr2[i]<q[-1]:
+                del q[-1]
+            if q!=[]:
+                prices[i]-=q[-1]
+            q.append(arr2[i])
+        return prices
+            
+        
+            

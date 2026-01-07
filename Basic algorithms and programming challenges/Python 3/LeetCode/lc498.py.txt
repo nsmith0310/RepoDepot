@@ -1,0 +1,47 @@
+class Solution:
+    def findDiagonalOrder(self, matrix: List[List[int]]) -> List[int]:
+        
+        f = []
+        p = 0
+        diag = []
+        lim2 = len(matrix)
+        if lim2==0:
+            return f
+        lim = len(matrix[0])
+        
+        i = 0
+        while i<len(matrix):
+            tmp = []
+            j = 0
+            k = i
+            while j<lim and k>=0:
+                tmp.append(matrix[k][j])
+                j+=1
+                k-=1
+            i+=1
+            if p==0:
+                p=1
+                f+=tmp
+            else:
+                f+=tmp[::-1]
+                p=0
+        
+        j = 1
+        while j<lim:
+            tmp = []
+            i = lim2-1
+            k = j
+            while k<lim and i>=0:
+                tmp.append(matrix[i][k])
+                k+=1
+                i-=1
+            j+=1
+            if p==0:
+                p=1
+                f+=tmp
+            else:
+                f+=tmp[::-1]
+                p=0
+                
+        return f
+                

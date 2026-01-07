@@ -1,0 +1,23 @@
+class Solution:
+    def numSub(self, s: str) -> int:
+        c = 0
+        
+        mod = 10**9 + 7
+        lim = len(s)
+        
+        i = 0
+        while i<lim:
+            j = i
+            count = 0
+            while j<lim:
+                if s[j]!='1':
+                    break
+                else:
+                    count+=1
+                    j+=1
+            
+            
+            c+=count*(count+1)//2
+            i = j+1
+        return c%mod
+       

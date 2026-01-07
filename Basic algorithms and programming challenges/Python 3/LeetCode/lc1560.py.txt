@@ -1,0 +1,29 @@
+class Solution:
+    def mostVisited(self, n: int, rounds: List[int]) -> List[int]:
+        tmp = [0]*n
+        
+        tmp[rounds[0]-1]=1
+        
+        
+        for i in range(0,len(rounds)-1):
+            
+            if rounds[i]<rounds[i+1]:
+                for j in range(rounds[i],rounds[i+1]):
+                    tmp[j]+=1
+            else:
+                for j in range(rounds[i],n):
+                    tmp[j]+=1
+                for j in range(0,rounds[i+1]):
+                    tmp[j]+=1
+                
+        tmp2 = [1]
+        mx = tmp[0]
+        for i in range(1,n):
+            if tmp[i]>mx:
+                mx = tmp[i]
+                tmp2=[i+1]
+            elif tmp[i]==mx:
+                
+                tmp2.append(i+1)
+        
+        return tmp2

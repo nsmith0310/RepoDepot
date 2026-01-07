@@ -1,0 +1,29 @@
+class Solution:
+    def numOfMinutes(self, n: int, headID: int, manager: List[int], informTime: List[int]) -> int:
+        
+        self.mx = 0
+        lim = len(manager)
+        arr = [0 for i in range(0,lim)]
+        d = dict()
+        
+        for i in range(0,lim):
+            try:
+                d[manager[i]].append(i)
+            except:
+                d[manager[i]]= [i]
+        ###print(d)     
+        def r(node,c):
+            if arr[node]!=0:return arr[node]
+            ###print(c)
+            val = c+informTime[node]
+            ###print(val)
+            
+            try:
+                for x in d[node]:
+                    ###print(x)
+                    r(x,val)
+            except:
+                if val>self.mx:self.mx = val
+        r(headID,0)  
+        return self.mx
+                

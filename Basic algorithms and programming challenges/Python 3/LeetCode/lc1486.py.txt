@@ -1,0 +1,8 @@
+class Solution:
+    def xorOperation(self, n: int, start: int) -> int:
+        
+        num = 0
+        
+        for i in range(0,n):
+            num^=(2*i+start)
+        return num
