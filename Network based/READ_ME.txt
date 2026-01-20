@@ -1,5 +1,5 @@
 Note: The relevant datasets have not been uploaded due to file size. If you would like the datasets, please reach out to me at
-nicholasms19920310@gmail.com 
+nicholas.m.smith.ai@gmail.com
 
 Optimizing Chicago Community Areas using Simulated Annealing over ReADI
 -performs a historical profiling of ReADI over Chicago community areas between 2015 and 2023

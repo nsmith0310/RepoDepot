@@ -95,8 +95,8 @@ class Net_C(nn.Module):
         x = F.relu(self.layer2(x))
         return self.layer3(x)
 
-#DQN agent
-class DQN:
+#DDQN agent
+class DDQN:
     def __init__(self, 
                  state_size, 
                  action_size, 
@@ -152,7 +152,7 @@ class DQN:
         action = torch.argmax(q_value_esimates).item()
         return action
     
-    #train DQN
+    #train DDQN
     def train(self):
         
         minibatch = random.sample(self.memory, self.batch_size)

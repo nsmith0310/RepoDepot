@@ -1,6 +1,6 @@
 from vizdoom import *
 import random, time
-import dqn, utility
+import ddqn, utility
 from collections import deque
 import numpy as np
 
@@ -50,14 +50,14 @@ game.init()
 
 print("scenario="+scenario[:-4])
 
-#DQN hyperparameters
+#DDQN hyperparameters
 batch_size = 32
 gamma = .95
 epsilon_decay = 0.0001
 target_update = 1024
 replay_memory = 16384
 
-agent = dqn.DQN(state_size, num_actions, gamma, epsilon_decay,replay_memory,
+agent = ddqn.DQN(state_size, num_actions, gamma, epsilon_decay,replay_memory,
                 target_update,batch_size=batch_size,network=network)
           
 #training

@@ -7,7 +7,7 @@ The vast majority of the challenges are in the Python 3 folder.
 Notes on the programming challenges:
 
 The scripts included run the gamut of simple to complex, and a few have non-standard dependencies.
-If you would either like an explanation of any of the challenges, or would like me to include any missing dependencies, please reach out to me.
+If you would either like an explanation of any of the challenges, or would like me to include any missing dependencies, please reach out to me at nicholas.m.smith.ai@gmail.com.
 
 Many of these challenges (not all) are not optimal solutions to their respective problems as they were some of my earliest programs and were my primary means of teaching myself to code.
 

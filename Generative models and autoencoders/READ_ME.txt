@@ -1,5 +1,5 @@
 Note: The relevant datasets have not been uploaded due to file size. If you would like the datasets, please reach out to me at
-nicholasms19920310@gmail.com 
+nicholas.m.smith.ai@gmail.com 
 
 Complex weighted autoencoder
 annotates and implements a minimalistic version of the model described in:
