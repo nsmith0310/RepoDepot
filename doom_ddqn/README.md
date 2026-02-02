@@ -18,21 +18,20 @@ This project highlights:
 ---
 
 ## Folder Structure
-
-doom_ddqn/
-
-├── src/ # Scripts
-│ ├── demo.py # Demo script
-│ ├── test.py # Evaluate trained model on 500 trials
-│ ├── train.py # Train DDQN; supports training using MobileNetv2 base or from scratch
-│ ├── ddqn.py # DDQN class and methods
-│ ├── utility.py # Utility library 
-│ └── model/ # Pretrained model
-│ | └── main_model.pth # Pretrained model
-├── Dockerfile # Container for running the interactive demo
-├── requirements.txt # Dependencies for running the interactive demo
-├── local_requirements.txt # Dependencies for full functionality of all scripts
-└── README.md # This file
+<br>
+doom_ddqn/<br>
+├── src/ # Scripts <br>
+│ ├── demo.py # Demo script <br>
+│ ├── test.py # Evaluate trained model on 500 trials <br>
+│ ├── train.py # Train DDQN; supports training using MobileNetv2 base or from scratch<br>
+│ ├── ddqn.py # DDQN class and methods<br>
+│ ├── utility.py # Utility library <br>
+│ └── model/ # Pretrained model<br>
+│ | └── main_model.pth # Pretrained model<br>
+├── Dockerfile # Container for running the interactive demo<br>
+├── requirements.txt # Dependencies for running the interactive demo<br>
+├── local_requirements.txt # Dependencies for full functionality of all scripts<br>
+└── README.md # This file<br>
 
 ---
 
