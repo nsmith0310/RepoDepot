@@ -10,7 +10,7 @@ Gopalakrishnan, Anand, Aleksandar Stanić, Jürgen Schmidhuber, and Michael Curt
 
 - attempts to compute image object bindings without supervision
 
--a ll weights and operations utilize complex numbers 
+- all weights and operations utilize complex numbers 
 
 - performs somewhat well even at small scale
 
