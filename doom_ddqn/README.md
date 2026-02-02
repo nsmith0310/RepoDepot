@@ -27,7 +27,7 @@ doom_ddqn/<br>
 │ ├── ddqn.py # DDQN class and methods<br>
 │ ├── utility.py # Utility library <br>
 │ └── model/ # Pretrained model<br>
-│    └── main_model.pth # Pretrained model<br>
+│   └── main_model.pth # Pretrained model<br>
 ├── Dockerfile # Container for running the interactive demo<br>
 ├── requirements.txt # Dependencies for running the interactive demo<br>
 ├── local_requirements.txt # Dependencies for full functionality of all scripts<br>
@@ -85,7 +85,7 @@ python train.py
 
 All scripts, notebooks, and models are free to explore for educational purposes 
 
---
+---
 
 ## Sources
 
