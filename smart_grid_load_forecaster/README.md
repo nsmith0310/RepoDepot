@@ -21,38 +21,38 @@ This project highlights:
 
 ## Folder Structure
 
-smart_grid_load_forecaster/
-├── src/ # Training and inference scripts
-│ ├── demo.py # Interactive demo
-│ ├── gb_inference.py # Run inference on test set using fully trained Gradient Boosting model
-│ ├── knn_inference.py # Run inference on test set using fully trained KNN model
-│ ├── gb_train.py # Train Gradient Boosting model
-│ ├── knn_train.py # Train KNN model
-│ ├── models.py # Model wrapper script 
-│ ├── map_tune.py #Script for hyperparameter and temperature station to load zone mapping search
-│ ├── formatter.py # Library for formatting dataset
-│ ├── utility.py # Utility library
-│ └── model/ # directory to store models 
-│ |  └── README.md #Instructions for downloading both trained Gradient Boosting and KNN models
-├── notebooks/ # Showcase and experiments
-│ └── gradient_boosting_vs_knn.ipynb #Compare Gradient Boosting and KNN 
-├── data/ 
-│ ├── sample.pkl #sample of dataset used for demo.py
-│ └── README.md # Instructions and link to download the full dataset
-├── Dockerfile # Container for running the demo
-├── requirements.txt # Dependencies for running the demo
-├── local_requirements.txt # Dependencies for full functionality of all scripts
-└── README.md # This file
+smart_grid_load_forecaster/<br>
+├── src/ # Training and inference scripts<br>
+│ ├── demo.py # Demo<br>
+│ ├── gb_inference.py # Run inference on test set using fully trained Gradient Boosting model<br>
+│ ├── knn_inference.py # Run inference on test set using fully trained KNN model<br>
+│ ├── gb_train.py # Train Gradient Boosting model<br>
+│ ├── knn_train.py # Train KNN model<br>
+│ ├── models.py # Model wrapper script <br>
+│ ├── map_tune.py #Script for hyperparameter and temperature station to load zone mapping search<br>
+│ ├── formatter.py # Library for formatting dataset<br>
+│ ├── utility.py # Utility library<br>
+│ └── model/ # directory to store models <br>
+│ |  └── README.md #Instructions for downloading both trained Gradient Boosting and KNN models<br>
+├── notebooks/ # Showcase and experiments<br>
+│ └── gradient_boosting_vs_knn.ipynb #Compare Gradient Boosting and KNN <br>
+├── data/ <br>
+│ ├── sample.pkl #sample of dataset used for demo.py<br>
+│ └── README.md # Instructions and link to download the full dataset<br>
+├── Dockerfile # Container for running the demo<br>
+├── requirements.txt # Dependencies for running the demo<br>
+├── local_requirements.txt # Dependencies for full functionality of all scripts<br>
+└── README.md # This file<br>
 
 ---
 
 ## Quick Start for Docker
 
-1. Build the Docker image
+1\. Build the Docker image
 
 docker build -t demo .
 
-2. Run the interactive demo
+2\. Run the interactive demo
 
 Note: the demo will download the pretrained Gradient Boosting model into the Docker container
 
@@ -62,19 +62,19 @@ docker run -it demo
 
 ## Running Locally
 
-1. Clone the repository
+1\. Clone the repository
 
-git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git
-cd RepoDepot
-git sparse-checkout init --cone
-git sparse-checkout set smart_grid_load_forecaster
-git checkout main
+git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git<br>
+cd RepoDepot<br>
+git sparse-checkout init --cone<br>
+git sparse-checkout set smart_grid_load_forecaster<br>
+git checkout main<br>
 
-2. Install dependencies
+2\. Install dependencies
 
 pip install -r local_requirements.txt
 
-3. Run script of choice
+3\. Run script of choice
 
 python demo.py 
 python gb_inference.py
@@ -104,6 +104,8 @@ Please see data/README.md
 
 Please see src/model/README.md
 - Trained models are not included in the repository due to file size limitations but simple instructions for download and use are provided
+
+---
 
 ## License
 
