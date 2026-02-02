@@ -1,0 +1,4 @@
+scikit-learn==1.5.1 #version required for loading pretrained models
+pandas
+numpy
+gdown #only needed for the demo
