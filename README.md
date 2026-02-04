@@ -28,13 +28,13 @@ These are independent projects each of which has its own description and instruc
 
 # Repository structure
 
-RepoDepot/
-├── eeg_signal_classifier/ # Bidirectional GRU EEG timeseries classifier
-├── doom_ddqn/ # VizDoom DDQN agent
-├── nlp_fake_news_classifier/ # NLP classifier for detecting real versus fake news
-├── smart_grid_load_forecaster/ # Gradient Boosting smart grid load forecaster
-├── other_projects/ # A collection of slightly less polished projects and scripts
-└── README.md # This file
+RepoDepot/<br>
+├── eeg_signal_classifier/ # Bidirectional GRU EEG timeseries classifier<br>
+├── doom_ddqn/ # VizDoom DDQN agent<br>
+├── nlp_fake_news_classifier/ # NLP classifier for detecting real versus fake news<br>
+├── smart_grid_load_forecaster/ # Gradient Boosting smart grid load forecaster<br>
+├── other_projects/ # A collection of slightly less polished projects and scripts<br>
+└── README.md # This file<br>
 
 # Clone repository
 
