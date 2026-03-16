@@ -18,56 +18,56 @@ This project highlights:
 ---
 
 ## Folder Structure
-
-nlp_fake_news_classifier/
-├── src/ # Inference scripts
-│ ├── demo.py # Interactive demo
-│ ├── inference.py # Run inference on test set using fully trained model
-│ ├── logistic_regression_classifier.py # Logistic Regression class
-│ ├── naive_bayes_classifier.py # Naive Bayes class
-│ ├── train.py # Train Naive Bayes
-│ ├── utility.py # Utility library 
-│ └── model/ # Pre-trained Naive Bayes model 
-├── notebooks/ # Showcase and experiments
-│ ├── naive_bayes_titles_only.ipynb # Demonstrate Naive Bayes trained on only titles; achieves over 99% classification accuracy
-│ └── naive_bayes_vs_logistic_regression.ipynb # Compares Naive Bayes against Logistic Regression each trained on all features 
-├── data/ # Instructions and link to download the full dataset
-├── Dockerfile # Container for running the interactive demo
-├── requirements.txt # Dependencies for running the interactive demo
-├── local_requirements.txt # Dependencies for full functionality of all scripts
-└── README.md # This file
+<br>
+nlp_fake_news_classifier/<br>
+├── src/ # Inference scripts<br>
+│ ├── demo.py # Interactive demo<br>
+│ ├── inference.py # Run inference on test set using fully trained model<br>
+│ ├── logistic_regression_classifier.py # Logistic Regression class<br>
+│ ├── naive_bayes_classifier.py # Naive Bayes class<br>
+│ ├── train.py # Train Naive Bayes<br>
+│ ├── utility.py # Utility library<br> 
+│ └── model/ # Pre-trained Naive Bayes model <br>
+├── notebooks/ # Showcase and experiments<br>
+│ ├── naive_bayes_titles_only.ipynb # Demonstrate Naive Bayes trained on only titles; achieves over 99% classification accuracy<br>
+│ └── naive_bayes_vs_logistic_regression.ipynb # Compares Naive Bayes against Logistic Regression each trained on all features<br> 
+├── data/ # Instructions and link to download the full dataset<br>
+├── Dockerfile # Container for running the interactive demo<br>
+├── requirements.txt # Dependencies for running the interactive demo<br>
+├── local_requirements.txt # Dependencies for full functionality of all scripts<br>
+└── README.md # This file<br>
 
 ---
 
 ## Quick Start for Docker
 
-1. Build the Docker image
+1\. Build the Docker image
 
 docker build -t demo .
 
-2. Run the interactive demo
+2\. Run the interactive demo
 
 docker run -it demo
 
-3. Type any headline and see the model prediction.
+3\. Type any headline and see the model prediction.
 
 ---
 
 ## Running Locally
 
-1. Clone the repository
+1\. Clone the repository
 
-git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git
-cd RepoDepot
-git sparse-checkout init --cone
-git sparse-checkout set nlp_fake_news_classifier
-git checkout main
+git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git<br>
+cd RepoDepot<br>
+git sparse-checkout init --cone<br>
+git sparse-checkout set nlp_fake_news_classifier<br>
+git checkout main<br>
 
-2. Install dependencies
+2\. Install dependencies
 
 pip install -r local_requirements.txt
 
-3. Run script of choice
+3\. Run script of choice
 
 python demo.py 
 python inference.py

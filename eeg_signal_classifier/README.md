@@ -18,32 +18,31 @@ This project highlights:
 ---
 
 ## Folder Structure
-
-eeg_signal_classifier/
-├── src/ # Inference scripts
-│ ├── demo.py # Demo
-│ ├── inference.py # Run inference on test set using fully trained model
-│ ├── train.py # Retrain model
-│ ├── preprocess.py # Preprocessing script 
-│ └── model/ 
-│   └── model_weights.weights.h5 # Pre-trained model
-├── data/ # Instructions and link to download the full dataset
-│   ├── sample.pkl #sample of test set for demo
-│   └── README.md #instructions for downloading and using full dataset
-├── Dockerfile # Container for running the demo
-├── requirements.txt # Dependencies for running the demo
-├── local_requirements.txt # Dependencies for full functionality of all scripts
-└── README.md # This file
+<br>
+eeg_signal_classifier/<br>
+├── src/ # Inference scripts<br>
+│ ├── demo.py # Demo<br>
+│ ├── inference.py # Run inference on test set using fully trained model<br>
+│ ├── train.py # Retrain model<br>
+│ ├── preprocess.py # Preprocessing script<br> 
+│ └── model/ # Pre-trained model<br>
+├── data/ # Instructions and link to download the full dataset<br>
+│   ├── sample.pkl #sample of test set for demo<br>
+│   └── README.md #instructions for downloading and using full dataset<br>
+├── Dockerfile # Container for running the demo<br>
+├── requirements.txt # Dependencies for running the demo<br>
+├── local_requirements.txt # Dependencies for full functionality of all scripts<br>
+└── README.md # This file<br>
 
 ---
 
 ## Quick Start for Docker
 
-1. Build the Docker image
+1\. Build the Docker image
 
 docker build -t demo .
 
-2. Run the demo
+2\. Run the demo
 
 docker run -it demo
 
@@ -51,19 +50,19 @@ docker run -it demo
 
 ## Running Locally
 
-1. Clone the repository
+1\. Clone the repository
 
-git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git
-cd RepoDepot
-git sparse-checkout init --cone
-git sparse-checkout set eeg_signal_classifier
-git checkout main
+git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git<br>
+cd RepoDepot<br>
+git sparse-checkout init --cone<br>
+git sparse-checkout set eeg_signal_classifier<br>
+git checkout main<br>
 
-2. Install dependencies
+2\. Install dependencies
 
 pip install -r local_requirements.txt
 
-3. Run script of choice
+3\. Run script of choice
 
 python demo.py 
 python inference.py

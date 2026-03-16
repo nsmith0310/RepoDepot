@@ -18,40 +18,39 @@ This project highlights:
 ---
 
 ## Folder Structure
-
-doom_ddqn/
-├── src/ # Scripts
-│ ├── demo.py # Demo script
-│ ├── test.py # Evaluate trained model on 500 trials
-│ ├── train.py # Train DDQN; supports training using MobileNetv2 base or from scratch 
-│ ├── ddqn.py # DDQN class and methods
-│ ├── utility.py # Utility library 
-│ └── model/ # Pretrained model
-│ | └── main_model.pth # Pretrained model
-├── Dockerfile # Container for running the interactive demo
-├── requirements.txt # Dependencies for running the interactive demo
-├── local_requirements.txt # Dependencies for full functionality of all scripts
-└── README.md # This file
+<br>
+doom_ddqn/<br>
+├── src/ # Scripts <br>
+│ ├── demo.py # Demo script <br>
+│ ├── test.py # Evaluate trained model on 500 trials <br>
+│ ├── train.py # Train DDQN; supports training using MobileNetv2 base or from scratch<br>
+│ ├── ddqn.py # DDQN class and methods<br>
+│ ├── utility.py # Utility library <br>
+│ └── model/ # Pretrained model<br>
+├── Dockerfile # Container for running the interactive demo<br>
+├── requirements.txt # Dependencies for running the interactive demo<br>
+├── local_requirements.txt # Dependencies for full functionality of all scripts<br>
+└── README.md # This file<br>
 
 ---
 
 ## Quick Start for Docker
 
-1. Build the Docker image
+1\. Build the Docker image
 
 docker build -t demo .
 
-2. Run the demo
+2\. Run the demo
 
 docker run --init -p 5000:5000 demo
 
 Note: if prompted, please allow permission
 
-3. View the demo
+3\. View the demo
 
 open a web browser and navigate to 127.0.0.1:5000
 
-4. End the demo
+4\. End the demo
 
 press CTRL+C
 
@@ -61,19 +60,19 @@ Note: you may have to press this multiple times
 
 ## Running Locally
 
-1. Clone the repository
+1\. Clone the repository
 
-git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git
-cd RepoDepot
-git sparse-checkout init --cone
-git sparse-checkout set doom_ddqn
-git checkout main
+git clone --depth 1 --no-checkout https://github.com/nsmith0310/RepoDepot.git<br>
+cd RepoDepot<br>
+git sparse-checkout init --cone<br>
+git sparse-checkout set doom_ddqn<br>
+git checkout main<br>
 
-2. Install dependencies
+2\. Install dependencies
 
 pip install -r local_requirements.txt
 
-3. Run script of choice
+3\. Run script of choice
 
 python demo.py 
 python test.py
@@ -85,7 +84,7 @@ python train.py
 
 All scripts, notebooks, and models are free to explore for educational purposes 
 
---
+---
 
 ## Sources
 
