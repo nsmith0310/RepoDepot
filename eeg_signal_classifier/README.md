@@ -1,19 +1,24 @@
-## Bidirectional GRU EEG timeseries classifier
+# Bidirectional GRU EEG timeseries classifier
 
-A Bidirectional GRU EEG timeseries classifier that classifies data into four possible video game genres. Trained on EEG data and game genre labels from 28 
-experimental subjects playing video games while having brain activity recorded.  
+## Summary
 
-This project highlights:
-- Model evaluation: achieves over 87% classification accuracy on holdout data
-- Experimentation: includes a framework for feature engineering including EEG channel combinations, principle component analysis, and more
-- Clean, production-like structure 
+A Bidirectional GRU EEG timeseries classifier that classifies data into four possible video game genres. Trained on EEG data and game genre labels from 28 experimental subjects playing video games while having brain activity recorded.  
 
 ---
 
-## Features
-- Inference demo: observe trained model classify sample from original test set; no dataset required
-- Trainer allowing feature engineering experimentation
-- Evaluation of classification performance on holdout data 
+## Description
+
+This project was developed to classify EEG timeseries data. It utilized the GAMEEMO dataset which consists of 28 human subjects playing 4 different video games of different genres while having their brain activity measured using EEG. The project utilized a bidirectional GRU model to classify 73 timesteps of EEG output into one of the four genres. It includes a framework for selecting different types of data preprocessing techniques such as standardization and normalization, as well as the ability to choose degree of dimensionality reduction via PCA. It also includes basic feature engineering by allowing specification of combinations of EEG channels. The bidirectional GRU (an improvement on recurrent neural networks) is trained with validation-based early stopping. The final trained network was evaluated on holdout testing data, achieving an accuracy of about 87% in determining which game the subject was playing.
+
+---
+
+## Tech Stack
+
+- Language: Python
+- ML / DL: TensorFlow, Keras
+- Data: NumPy, Pandas, scikit-learn
+- Visualization: Matplotlib
+- MLOps / Tools: Git, Docker
 
 ---
 
@@ -35,6 +40,10 @@ eeg_signal_classifier/<br>
 └── README.md # This file<br>
 
 ---
+
+## Demo
+
+Observe trained model classify sample from holdout test set; no dataset required.
 
 ## Quick Start for Docker
 

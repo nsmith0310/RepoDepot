@@ -1,19 +1,33 @@
-## ViZDoom DDQN 
+# ViZDoom DDQN 
+
+
+## Summary
 
 A DDQN training and evaluation framework for VizDoom supporting multiple scenarios and architectures. Allows training and testing either a DDQN from scratch or using MobileNetV2 as a base. Includes a demo of a pretrained network's performance on the 'Corridor' scenario. 
 
-This project highlights:
-- Model evaluation: achieves over 94% win rate on Corridor
-- Experimentation: select different scenarios, architectures, and agent hyperparameters (reward shaping and frame skipping) 
-- Clean, production-like structure
+---
+
+## Description
+
+This project was developed to explore the ability of DDQN to achieve quality performance on the classic video game Doom. It uses a training framework that selects different scenarios and reward-shaping values, chooses DDQN network architecture, then trains the agent via the DDQN reinforcement learning algorithm. The training method includes reward-shaping, experience replay buffer, frame stacking, frame skipping, and two networks to stabilize training. This project also includes a script to evaluate the trained agent on a number of metrics like win rate, time-per-episode, and number of kills. The final best model achieves over 94% win rate on the "Deadly Corridor" scenario.   
 
 ---
 
-## Features
-- View trained DDQN winning VizDoom Corridor scenario
-- Trainer for different VizDoom scenarios, alternate DDQN architectures, and agent hyperparameters (reward shaping and frame skipping)
-- Test trained DDQN and view testing metrics
-- No dataset required
+## DDQN agent
+
+Option A: Train a DDQN network entirely from scratch. 
+
+Option B: Utilize pretrained MobileNetV2 as base and only train head.
+
+---
+
+## Tech Stack
+
+- Language: Python
+- ML / DL: PyTorch
+- Data: NumPy, Pillow
+- Visualization: Matplotlib
+- MLOps / Tools: Git, Docker
 
 ---
 
@@ -34,6 +48,10 @@ doom_ddqn/<br>
 
 ---
 
+## Demo
+
+Observe the trained agent perform on "Deadly Corridor".
+
 ## Quick Start for Docker
 
 1\. Build the Docker image
@@ -48,7 +66,7 @@ Note: if prompted, please allow permission
 
 3\. View the demo
 
-open a web browser and navigate to 127.0.0.1:5000
+open a web browser and navigate to http://localhost:5000
 
 4\. End the demo
 

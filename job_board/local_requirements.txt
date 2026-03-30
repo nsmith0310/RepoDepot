@@ -1,0 +1,26 @@
+# PyTorch with CUDA 12.8 — install this file with:
+#   pip install -r additional_requirements.txt
+# Requires a GPU with CUDA 12.x drivers installed.
+# For CUDA 12.6 instead, replace cu128 with cu126 in the index URL below.
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+torch
+torchvision
+torchaudio
+
+# HuggingFace stack
+transformers==5.4.0
+accelerate==1.13.0
+datasets==4.8.4
+huggingface_hub==1.8.0
+tokenizers==0.22.2
+safetensors
+bitsandbytes==0.49.2
+
+# ML utilities
+scikit-learn
+pandas
+numpy
+
+# Scraper
+requests

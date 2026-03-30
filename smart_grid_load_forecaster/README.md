@@ -1,21 +1,23 @@
-## Gradient Boosting smart grid load timeseries forecaster
+# Gradient Boosting smart grid load timeseries forecaster
+
+## Summary
 
 A Gradient Boosting regressor system for smart grid load prediction. Uses historical temperatures and loads to predict the load for different load measurement stations over 24 hours and multiple days. Compares performance of a Gradient Boosting regressor system against a KNN regressor system. 
 
-This project highlights:
-- Model evaluation: Gradient Boosting achieves an R^2 of over .87 on unseen data
-- Comparison between Gradient Boosting and KNN (see notebooks)
-- Experimentation: includes a complex feature engineering and data formatting framework supporting many different training options
-- Clean, production-like structure
+---
+
+## Description
+
+This project was designed to predict smart grid load demand based on historical (timeseries) temperatures and load values using real-world data. It compares gradient boosting and KNN regression, with gradient boosting ultimately performing better. Please see notebooks for a more in-depth comparison. The project first automatically searches for an optimal mapping between temperature measurement stations and load zones. It then uses this mapping to assign historical temperature measurements to load measurements. It includes a complex feature engineering, preprocessing, and formatting framework which trains 24 models (one for each hour of the day load is to be predicted for on multiple load zones) and combines their output. Feature engineering includes the flexibility to select from various combinations of additional features like fiscal quarter or whether the day falls on a weekend. The final gradient boosting model achieves an R^2 of about .87 on withheld testing data.
 
 ---
 
-## Features
-- Demo: showcases trained Gradient Boosting model output for one smart grid load zone over a 24 hour period on one day, comparing output to known load for that
-  time period, and calculating R^2 for a small sample of the dataset not seen during training
-- Reproducible experiments: comparison between Gradient Boosting and KNN across training, validation, and testing examining execution times, R^2, and RPE
-  or relative percentage error values; also examines the test set instances on which both models performed the worst on.
-- Trainer supporting flexible feature engineering
+## Tech Stack
+
+- Language: Python
+- ML / DL: scikit-learn
+- Data: NumPy, Pandas, scikit-learn
+- MLOps / Tools: Git, Docker
 
 ---
 
@@ -45,6 +47,11 @@ smart_grid_load_forecaster/<br>
 └── README.md # This file<br>
 
 ---
+
+## Demo
+
+Showcases trained Gradient Boosting model output for one smart grid load zone over a 24 hour period on one day, comparing output to known load for that
+time period, and calculating R^2 for a small sample of the dataset not seen during training
 
 ## Quick Start for Docker
 

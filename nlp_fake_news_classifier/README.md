@@ -1,19 +1,24 @@
-## NLP Fake news classifier 
+# NLP Fake news classifier 
+
+## Summary
 
 A Naive Bayes classifier which classifies news articles as real or fake. Includes a pretrained model which obtains near-perfect classification accuracy on a balanced test set of over 8900 samples. Also includes comparisons between Naive Bayes using different features and Logistic Regression using those same features.  
 
-This project highlights:
-- Model evaluation: achieves over 99% classification accuracy on a balanced dataset of over 8900 samples
-- Comparison experiments between Naive Bayes and Logistic Regression (see notebooks)
-- Clean, production-like structure
+---
+
+## Description
+
+This project was developed to effectively classify news articles as being real or fake. It compares Naive Bayes against Logistic Regression and finds an optimal algorithm and set of features. Naive Bayes was coded from scratch and is ultimately the best-performing method with appropriate feature selection. Please see the notebooks for a more in-depth comparison. The project includes the ability to select different combinations of features (article title, article contents, article subject) as well as other basic preprocessing steps like lowercasing, segmentation, and vectorization. It trains and compares both Naive Bayes and Logistic Regression using the same features and preprocessing steps. The final optimal model - Naive Bayes using only article title - achieves over 99% classification accuracy and a near-perfect ROC curve on a balanced holdout test set of over 8900 samples.
 
 ---
 
-## Features
-- Interactive inference demo: type in a headline and see the prediction instantly; no dataset required
-- Reproducible experiments: comparison between Naive Bayes and Logistic Regression model; showcase of Naive Bayes model achieving high accuracy 
-  using only article titles 
-- Trainer allowing for basic feature engineering experimentation (e.g. using just article titles, or article titles and content)
+## Tech Stack
+
+- Language: Python
+- ML / DL: scikit-learn
+- Data: Pandas, scikit-learn
+- Visualization: Matplotlib
+- MLOps / Tools: Git, Docker
 
 ---
 
@@ -38,6 +43,10 @@ nlp_fake_news_classifier/<br>
 └── README.md # This file<br>
 
 ---
+
+## Demo
+
+Type in a headline and see the prediction for whether it is fake or real news. No dataset required. 
 
 ## Quick Start for Docker
 
