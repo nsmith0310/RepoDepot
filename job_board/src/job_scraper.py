@@ -87,11 +87,9 @@ def get_entries(job, category):
 
 # main job scrape
 
-#remove api keys before publishing
-
 #adzuna parameters
-APP_ID = "70b3b9ae"
-APP_KEY = "8e22e51862eb6b194c456cb9b4c95708"
+APP_ID = None #please enter your APP_ID
+APP_KEY = None #please enter your APP_KEY
 BASE_URL = "https://api.adzuna.com/v1/api/jobs/us/search/{}"
 job_titles = ["machine learning engineer","software engineer","data scientist"]
 calls = 0

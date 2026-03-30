@@ -30,8 +30,8 @@ with open(file_path, 'r') as file:
                 negative_titles.append(text)
 
 #adzuna parameters
-APP_ID = "70b3b9ae" #dont forget to remove this before publishing
-APP_KEY = "8e22e51862eb6b194c456cb9b4c95708" #dont forget to remove this before publishing
+APP_ID = None #please enter your APP_ID
+APP_KEY = None #please enter your APP_KEY
 
 BASE_URL = "https://api.adzuna.com/v1/api/jobs/us/search/{}"
 
