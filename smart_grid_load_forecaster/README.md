@@ -1,4 +1,4 @@
-# Gradient Boosting smart grid load timeseries forecaster
+# Gradient Boosting Time-Series Load Forecaster - Smart Grid
 
 ## Summary
 

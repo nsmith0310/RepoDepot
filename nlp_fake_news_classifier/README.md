@@ -1,4 +1,4 @@
-# NLP Fake news classifier 
+# NLP Fake News Classifier
 
 ## Summary
 

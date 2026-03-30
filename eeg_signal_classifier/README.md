@@ -1,4 +1,4 @@
-# Bidirectional GRU EEG timeseries classifier
+# Bidirectional GRU EEG Timeseries Classifier
 
 ## Summary
 
