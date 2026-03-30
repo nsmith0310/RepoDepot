@@ -1,4 +1,4 @@
-# Job Board
+# ML-Powered Job Board
 
 
 ## Summary

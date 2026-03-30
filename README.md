@@ -18,6 +18,7 @@ A collection of applied machine learning projects focused on model development, 
 
 # Projects
 
+- ML-Powered job board
 - Bidirectional GRU EEG timeseries classifier
 - NLP Fake news classifier
 - Gradient Boosting smart grid load timeseries forecaster
