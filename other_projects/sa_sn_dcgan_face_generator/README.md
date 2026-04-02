@@ -4,7 +4,7 @@ nicholas.m.smith.ai@gmail.com
 
 
 
-\## Complex weighted autoencoder
+## Complex weighted autoencoder
 
 
 
@@ -26,7 +26,7 @@ Normalization", IEEE, IEEE Access Volume 12, pp 154614- 154630, 17 October 2024
 
 
 
--did not function well; suffers from mode collapse
+- did not function well; suffers from mode collapse
 
 
 
